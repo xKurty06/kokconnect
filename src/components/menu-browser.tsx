@@ -27,28 +27,34 @@ export function MenuBrowser() {
   return (
     <div className="grid min-h-[calc(100dvh-68px)] w-full grid-cols-[210px_minmax(0,1fr)]">
       <aside className="sticky top-[68px] h-[calc(100dvh-68px)] self-start overflow-y-auto border-r border-border bg-white" aria-label="Menu filters">
-        <div className="border-b border-border px-5 py-4 text-lg font-bold">Menu</div>
-        <div className="grid">
+        <div className="border-b border-border px-5 py-4">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand/70">Categories</p>
+          <h2 className="mt-1 text-lg font-bold">Menu</h2>
+        </div>
+        <div className="grid p-2">
           {categories.map((item) => (
-            <button key={item} onClick={() => setCategory(item)} className={`min-h-11 shrink-0 cursor-pointer border-l-4 px-4 text-left text-sm ${category === item ? "border-brand bg-brand-tint font-semibold text-brand" : "border-transparent text-copy hover:bg-brand-tint"}`}>
+            <button key={item} onClick={() => setCategory(item)} className={`min-h-11 shrink-0 cursor-pointer rounded-lg border-l-4 px-3 text-left text-sm transition-all duration-200 ${category === item ? "translate-x-1 border-brand bg-brand-tint font-semibold text-brand shadow-sm" : "border-transparent text-copy hover:translate-x-1 hover:bg-brand-tint"}`}>
               {item}
             </button>
           ))}
         </div>
-        <p className="px-5 pb-2 pt-7 text-xs italic text-muted">Availability</p>
-        <div className="grid">
+        <p className="px-5 pb-2 pt-6 text-xs font-semibold uppercase tracking-[0.14em] text-muted">Availability</p>
+        <div className="grid px-2">
           {(["All Items", "Available", "Sold Out"] as Availability[]).map((item) => (
-            <button key={item} onClick={() => setAvailability(item)} className={`min-h-11 cursor-pointer border-l-4 px-5 text-left text-sm ${availability === item ? "border-brand bg-brand font-semibold text-white" : "border-transparent text-copy hover:bg-brand-tint"}`}>{item}</button>
+            <button key={item} onClick={() => setAvailability(item)} className={`min-h-11 cursor-pointer rounded-lg border-l-4 px-3 text-left text-sm transition-all duration-200 ${availability === item ? "translate-x-1 border-brand bg-brand font-semibold text-white shadow-sm" : "border-transparent text-copy hover:translate-x-1 hover:bg-brand-tint"}`}>{item}</button>
           ))}
         </div>
       </aside>
 
       <main className="relative min-w-0 bg-background px-6 pb-20">
         <div key={`${animationKey}-heading`} className="menu-panel-enter flex flex-wrap items-center justify-between gap-3 border-b border-border py-4">
-          <h1 className="text-lg font-bold">{category} <span className="text-muted">({filtered.length})</span></h1>
-          <label className="relative">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand/70">Cooked to order</p>
+            <h1 className="mt-1 text-lg font-bold">{category} <span className="text-muted">({filtered.length})</span></h1>
+          </div>
+          <label className="relative transition duration-200 focus-within:-translate-y-0.5">
             <span className="sr-only">Sort meals</span>
-            <select value={sort} onChange={(event) => setSort(event.target.value)} className="h-10 appearance-none rounded-lg border border-border bg-white py-2 pl-4 pr-10 text-sm">
+            <select value={sort} onChange={(event) => setSort(event.target.value)} className="h-10 appearance-none rounded-lg border border-border bg-white py-2 pl-4 pr-10 text-sm shadow-sm transition focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-tint">
               <option value="default">Sort by: Default</option>
               <option value="low">Price: Low to High</option>
               <option value="high">Price: High to Low</option>
@@ -63,7 +69,7 @@ export function MenuBrowser() {
             </div>
           ))}
         </div>
-        <a href="/cart" className="fixed bottom-5 right-8 z-30 inline-flex min-h-12 items-center gap-2 rounded-full bg-brand px-5 text-sm font-semibold text-white shadow-xl">
+        <a key={bagCount} href="/cart" className="bag-bump fixed bottom-5 right-8 z-30 inline-flex min-h-12 items-center gap-2 rounded-full bg-brand px-5 text-sm font-semibold text-white shadow-xl transition hover:-translate-y-0.5 hover:bg-brand-deep hover:shadow-2xl">
           <ShoppingBag className="size-4" /> My Bag ({bagCount})
         </a>
       </main>
