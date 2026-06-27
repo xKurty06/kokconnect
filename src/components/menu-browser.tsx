@@ -41,12 +41,12 @@ export function MenuBrowser() {
         </div>
       </aside>
 
-      <main className="relative min-w-0 bg-background px-7 pb-24">
+      <main className="relative min-w-0 bg-background px-6 pb-20">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border py-4">
           <h1 className="text-lg font-bold">{category} <span className="text-muted">({filtered.length})</span></h1>
           <label className="relative">
             <span className="sr-only">Sort meals</span>
-            <select value={sort} onChange={(event) => setSort(event.target.value)} className="h-11 appearance-none rounded-lg border border-border bg-white py-2 pl-4 pr-10 text-sm">
+            <select value={sort} onChange={(event) => setSort(event.target.value)} className="h-10 appearance-none rounded-lg border border-border bg-white py-2 pl-4 pr-10 text-sm">
               <option value="default">Sort by: Default</option>
               <option value="low">Price: Low to High</option>
               <option value="high">Price: High to Low</option>
@@ -54,8 +54,8 @@ export function MenuBrowser() {
             <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted" />
           </label>
         </div>
-        <div className="grid grid-cols-4 gap-5 py-7">
-          {filtered.map((product) => <ProductCard key={product.id} product={product} onAdd={() => setBagCount((count) => count + 1)} />)}
+        <div className="grid grid-cols-5 gap-4 py-5">
+          {filtered.map((product) => <ProductCard key={product.id} product={product} menuDense onAdd={() => setBagCount((count) => count + 1)} />)}
         </div>
         <a href="/cart" className="fixed bottom-5 right-8 z-30 inline-flex min-h-12 items-center gap-2 rounded-full bg-brand px-5 text-sm font-semibold text-white shadow-xl">
           <ShoppingBag className="size-4" /> My Bag ({bagCount})
