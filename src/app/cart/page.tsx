@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CartClient } from "@/components/cart-client";
+import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = { title: "Your Bag" };
@@ -14,6 +15,7 @@ export default function CartPage() {
         <p className="mt-1 text-sm text-muted">Check your selected meals before continuing.</p>
         <div className="mt-6"><CartClient /></div>
       </main>
+      <SiteFooter />
     </div>
   );
 }
