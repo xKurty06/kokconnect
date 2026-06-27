@@ -39,7 +39,7 @@ export function SiteHeader({ active, variant = "white", showSearch = false, sear
   };
 
   return (
-    <header className={`${sticky ? "sticky top-0 z-50" : ""} h-[68px] border-b ${headerClass}`}>
+    <header className={`${sticky ? "sticky top-0" : "relative"} z-50 h-[68px] border-b ${headerClass}`}>
       <div className={innerClass}>
         <Link href="/" className="group flex shrink-0 items-center gap-2 text-sm font-bold" aria-label="Kuya Kok's home">
           <span className="grid size-12 place-items-center rounded-full bg-white/10 ring-1 ring-white/15 transition duration-200 group-hover:scale-[1.03] group-hover:bg-white/15">
