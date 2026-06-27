@@ -7,29 +7,31 @@ import { Button } from "@/components/ui/button";
 export function ProductCard({
   product,
   compact = false,
+  menuDense = false,
   onAdd,
 }: {
   product: Product;
   compact?: boolean;
+  menuDense?: boolean;
   onAdd?: (product: Product) => void;
 }) {
   return (
     <article className="group min-w-0 overflow-hidden rounded-xl bg-white shadow-[0_4px_12px_rgba(0,0,0,0.07)]">
       <div
         className={`relative grid place-items-center overflow-hidden bg-border ${
-          compact ? "aspect-[4/3]" : "aspect-[3/2]"
+          compact ? "aspect-[4/3]" : menuDense ? "aspect-[5/3]" : "aspect-[3/2]"
         }`}
       >
         <Image
           src={product.image}
           alt={`${product.name} meal`}
           fill
-          sizes="320px"
+          sizes={menuDense ? "260px" : "320px"}
           className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
         />
 
         {!compact && (
-          <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-brand-tint px-2.5 py-1 text-[11px] font-semibold text-brand">
+          <span className={`absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-brand-tint font-semibold text-brand ${menuDense ? "px-2 py-0.5 text-[10px]" : "px-2.5 py-1 text-[11px]"}`}>
             <Timer className="size-3" />
             {product.prepTime}
           </span>
@@ -42,12 +44,12 @@ export function ProductCard({
         )}
       </div>
 
-      <div className="grid gap-1.5 p-2.5">
+      <div className={`grid gap-1.5 ${menuDense ? "p-2.5" : "p-2.5"}`}>
         <h3 className="truncate text-sm font-bold text-ink">{product.name}</h3>
         <p className="text-sm font-bold text-brand">{formatPrice(product.price)}</p>
 
         <Button
-          className="mt-1 w-full min-h-9 py-2 text-sm"
+          className={`${menuDense ? "mt-1 min-h-9" : "mt-1 min-h-9"} w-full py-2 text-sm`}
           disabled={!product.available}
           onClick={() => onAdd?.(product)}
         >
