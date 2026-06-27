@@ -63,7 +63,7 @@ export function RegisterFlow() {
         })}
       </ol>
 
-      {step === 1 && <form key="step-1" noValidate className="auth-card-enter mx-auto mt-6 max-w-3xl rounded-2xl border border-border bg-white/90 p-6 shadow-[0_12px_30px_rgba(0,0,0,0.08)]" onSubmit={(event) => { event.preventDefault(); setStep(2); }}>
+      {step === 1 && <form key="step-1" noValidate className="auth-card-enter mx-auto mt-6 max-w-3xl" onSubmit={(event) => { event.preventDefault(); setStep(2); }}>
         <div className="grid grid-cols-2 gap-4">
           <label className={labelClass}>Full Name<input value={data.name} onChange={(event) => update("name", event.target.value)} autoComplete="name" className={inputClass} /></label>
           <label className={labelClass}>Email Address<input type="email" value={data.email} onChange={(event) => update("email", event.target.value)} autoComplete="email" className={inputClass} /></label>
