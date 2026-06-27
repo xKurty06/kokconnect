@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -12,17 +12,57 @@ export function LoginForm() {
   return (
     <div className="p-9">
       <div className="flex items-center gap-3">
-        <Image src="/assets/kuya-kok-logo.png" alt="Kuya Kok's logo" width={76} height={76} className="size-[76px] object-contain" />
-        <div><h1 className="text-3xl font-bold">Welcome Back!</h1><p className="mt-1 text-sm text-muted">Log in to your Kuya Kok&apos;s account.</p></div>
+        <div className="grid size-[82px] place-items-center rounded-2xl bg-brand-tint ring-1 ring-brand/10">
+          <Image src="/assets/kuya-kok-logo.png" alt="Kuya Kok's logo" width={76} height={76} className="size-[76px] object-contain" />
+        </div>
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand/70">KokConnect</p>
+          <h1 className="mt-1 text-3xl font-bold">Welcome Back!</h1>
+          <p className="mt-1 text-sm text-muted">Log in to your Kuya Kok&apos;s account.</p>
+        </div>
       </div>
-      <form className="mt-8 grid gap-5" onSubmit={(event) => event.preventDefault()}>
-        <label className="grid gap-2 text-sm font-semibold">Email Address<input type="email" autoComplete="email" placeholder="your.account@email.com" className="h-12 rounded-lg border-0 bg-background px-4 font-normal placeholder:text-muted" /></label>
-        <label className="grid gap-2 text-sm font-semibold">Password<span className="relative"><input type={showPassword ? "text" : "password"} autoComplete="current-password" placeholder="••••••••" className="h-12 w-full rounded-lg border-0 bg-background px-4 pr-12 font-normal placeholder:text-muted" /><button type="button" onClick={() => setShowPassword((value) => !value)} className="absolute right-1 top-0 grid size-12 cursor-pointer place-items-center text-muted" aria-label={showPassword ? "Hide password" : "Show password"}>{showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}</button></span><Link href="/login" className="justify-self-end text-xs font-semibold text-brand">Forgot password?</Link></label>
+
+      <div className="mt-6 flex items-center gap-2 rounded-xl border border-gold-pale bg-gold-tint px-4 py-3 text-xs font-medium text-gold-deep">
+        <ShieldCheck className="size-4 shrink-0" />
+        Frontend demo only — no real account credentials are processed.
+      </div>
+
+      <form className="mt-7 grid gap-5" onSubmit={(event) => event.preventDefault()}>
+        <label className="grid gap-2 text-sm font-semibold">
+          Email Address
+          <input type="email" autoComplete="email" placeholder="your.account@email.com" className="form-field h-12 rounded-lg px-4 font-normal placeholder:text-muted" />
+        </label>
+
+        <label className="grid gap-2 text-sm font-semibold">
+          Password
+          <span className="relative">
+            <input type={showPassword ? "text" : "password"} autoComplete="current-password" placeholder="••••••••" className="form-field h-12 w-full rounded-lg px-4 pr-12 font-normal placeholder:text-muted" />
+            <button type="button" onClick={() => setShowPassword((value) => !value)} className="absolute right-1 top-0 grid size-12 cursor-pointer place-items-center rounded-lg text-muted hover:bg-brand-tint hover:text-brand" aria-label={showPassword ? "Hide password" : "Show password"}>
+              {showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
+            </button>
+          </span>
+          <Link href="/login" className="justify-self-end text-xs font-semibold text-brand hover:text-brand-deep">
+            Forgot password?
+          </Link>
+        </label>
+
         <Button type="submit" className="w-full">Log In</Button>
       </form>
-      <div className="my-5 flex items-center gap-3 text-xs text-muted"><span className="h-px flex-1 bg-border" /><span>or continue with</span><span className="h-px flex-1 bg-border" /></div>
-      <button type="button" className="flex min-h-12 w-full cursor-pointer items-center justify-center gap-3 rounded-full border border-border bg-white text-sm font-semibold hover:bg-background"><span className="font-bold text-brand">G</span>Continue with Google</button>
-      <p className="mt-6 text-center text-sm text-muted">Don&apos;t have an account? <Link href="/register" className="font-semibold text-brand">Sign Up</Link></p>
+
+      <div className="my-5 flex items-center gap-3 text-xs text-muted">
+        <span className="h-px flex-1 bg-border" />
+        <span>or continue with</span>
+        <span className="h-px flex-1 bg-border" />
+      </div>
+
+      <button type="button" className="group flex min-h-12 w-full cursor-pointer items-center justify-center gap-3 rounded-full border border-border bg-white text-sm font-semibold shadow-sm transition hover:-translate-y-0.5 hover:bg-background hover:shadow-md">
+        <span className="grid size-6 place-items-center rounded-full bg-brand-tint font-bold text-brand transition group-hover:scale-105">G</span>
+        Continue with Google
+      </button>
+
+      <p className="mt-6 text-center text-sm text-muted">
+        Don&apos;t have an account? <Link href="/register" className="font-semibold text-brand hover:text-brand-deep">Sign Up</Link>
+      </p>
     </div>
   );
 }
