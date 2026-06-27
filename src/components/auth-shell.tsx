@@ -7,7 +7,7 @@ export function AuthShell({ children, wide = false }: { children: ReactNode; wid
       <div className="pointer-events-none fixed bottom-10 right-16 size-28 rounded-full bg-brand/15 blur-2xl" />
       <div
         className={`auth-card-enter relative w-full overflow-hidden rounded-2xl border border-border border-t-4 border-t-brand bg-white shadow-[0_24px_70px_rgba(17,17,17,0.18)] ring-1 ring-black/[0.04] ${
-          wide ? "max-w-[860px]" : "max-w-[480px]"
+          wide ? "max-w-[960px]" : "max-w-[480px]"
         }`}
       >
         <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-brand-tint/70 to-transparent" />
