@@ -49,11 +49,11 @@ export default function HomePage() {
               </div>
 
               <div className="home-hero-media relative h-[430px] overflow-visible">
-                <div className="absolute right-14 top-16 h-80 w-80 rounded-full bg-gold-warm/20 blur-3xl" />
-                <div className="absolute bottom-[-18px] right-20 h-80 w-80 rounded-full bg-black/15 blur-3xl" />
-                <div className="absolute right-8 top-16 h-[390px] w-[390px] rounded-full bg-white/8 blur-[90px]" />
+                <div className="absolute right-14 top-4 h-80 w-80 rounded-full bg-gold-warm/20 blur-3xl" />
+                <div className="absolute bottom-8 right-20 h-80 w-80 rounded-full bg-black/15 blur-3xl" />
+                <div className="absolute right-8 top-4 h-[390px] w-[390px] rounded-full bg-white/8 blur-[90px]" />
 
-                <div className="absolute right-[-24px] top-[-6px] z-30 h-[750px] w-[750px]">
+                <div className="absolute right-[-24px] top-[-84px] z-30 h-[750px] w-[750px]">
                   <div className="absolute bottom-[106px] left-1/2 h-16 w-[340px] -translate-x-1/2 rounded-full bg-black/25 blur-2xl" />
                   <Image
                     src="/assets/grilled-chicken-cutout.png"
