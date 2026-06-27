@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "Menu" };
 export default function MenuPage() {
   return (
     <div className="min-h-dvh bg-background">
-      <SiteHeader active="menu" variant="red" showSearch />
+      <SiteHeader active="menu" variant="red" showSearch sticky />
       <MenuBrowser />
     </div>
   );
