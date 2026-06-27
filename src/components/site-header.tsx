@@ -21,7 +21,7 @@ export function SiteHeader({ active, variant = "white", showSearch = false, sear
   const [searchValue, setSearchValue] = useState(searchDefaultValue);
   const innerClass = contained
     ? "mx-auto flex h-full w-full max-w-[1560px] items-center justify-between gap-5 px-8"
-    : "flex h-full w-full items-center justify-between gap-5 px-[60px]";
+    : "flex h-full w-full items-center justify-between gap-5 px-5";
   const headerClass = red
     ? "border-brand-deep bg-brand/95 text-white shadow-lg backdrop-blur"
     : "border-border bg-white/95 text-ink backdrop-blur";
