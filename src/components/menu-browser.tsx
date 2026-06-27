@@ -10,20 +10,20 @@ type Availability = "All Items" | "Available" | "Sold Out";
 
 export function MenuBrowser({ initialSearchQuery = "" }: { initialSearchQuery?: string }) {
   const cleanInitialSearch = initialSearchQuery.trim();
-  const [category, setCategory] = useState<ProductCategory>(cleanInitialSearch ? "Best Seller" : "Rice Meals");
+  const [category, setCategory] = useState<ProductCategory>("Rice Meals");
   const [availability, setAvailability] = useState<Availability>("All Items");
   const [sort, setSort] = useState("default");
   const [bagCount, setBagCount] = useState(2);
   const searchQuery = cleanInitialSearch.toLowerCase();
 
   const filtered = useMemo(() => {
-    let items = products.filter((product) => product.category === category || category === "Best Seller");
-    if (searchQuery) {
-      items = items.filter((product) => {
-        const searchable = `${product.name} ${product.category}`.toLowerCase();
-        return searchable.includes(searchQuery);
-      });
-    }
+    let items = searchQuery
+      ? products.filter((product) => {
+          const searchable = `${product.name} ${product.category}`.toLowerCase();
+          return searchable.includes(searchQuery);
+        })
+      : products.filter((product) => product.category === category || category === "Best Seller");
+
     if (availability === "Available") items = items.filter((product) => product.available);
     if (availability === "Sold Out") items = items.filter((product) => !product.available);
     if (sort === "low") items = [...items].sort((a, b) => a.price - b.price);
@@ -43,7 +43,7 @@ export function MenuBrowser({ initialSearchQuery = "" }: { initialSearchQuery?: 
         </div>
         <div className="grid gap-1 p-2">
           {categories.map((item) => (
-            <button key={item} onClick={() => setCategory(item)} className={`min-h-11 shrink-0 cursor-pointer rounded-lg border-l-4 px-3 text-left text-sm transition-all duration-200 ${category === item ? "border-brand bg-brand-tint font-semibold text-brand shadow-sm" : "border-transparent text-copy hover:border-brand-blush hover:bg-brand-tint hover:shadow-sm"}`}>
+            <button key={item} onClick={() => setCategory(item)} className={`min-h-11 shrink-0 cursor-pointer rounded-lg border-l-4 px-3 text-left text-sm transition-all duration-200 ${!searchQuery && category === item ? "border-brand bg-brand-tint font-semibold text-brand shadow-sm" : "border-transparent text-copy hover:border-brand-blush hover:bg-brand-tint hover:shadow-sm"}`}>
               {item}
             </button>
           ))}
