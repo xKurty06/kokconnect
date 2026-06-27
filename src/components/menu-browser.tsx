@@ -24,7 +24,7 @@ export function MenuBrowser() {
 
   return (
     <div className="grid min-h-[calc(100dvh-68px)] w-full grid-cols-[210px_minmax(0,1fr)]">
-      <aside className="min-h-full border-r border-border bg-white" aria-label="Menu filters">
+      <aside className="sticky top-[68px] h-[calc(100dvh-68px)] self-start overflow-y-auto border-r border-border bg-white" aria-label="Menu filters">
         <div className="border-b border-border px-5 py-4 text-lg font-bold">Menu</div>
         <div className="grid">
           {categories.map((item) => (
