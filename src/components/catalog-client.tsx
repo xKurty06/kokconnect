@@ -17,8 +17,8 @@ export function CatalogClient() {
   }, [category]);
 
   return (
-    <section className="min-h-0 flex-1 overflow-hidden bg-white py-4" aria-labelledby="browse-heading">
-      <div className={`${DESKTOP_CONTAINER} flex h-full min-h-0 flex-col`}>
+    <section className="min-h-0 flex-1 overflow-visible bg-white py-4" aria-labelledby="browse-heading">
+      <div className={`${DESKTOP_CONTAINER} flex h-full min-h-0 flex-col overflow-visible`}>
         <div className="home-catalog-header flex shrink-0 items-center justify-between gap-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand/70">Freshly grilled picks</p>
@@ -31,7 +31,7 @@ export function CatalogClient() {
           </Link>
         </div>
 
-        <div className="home-category-tabs mt-3 flex shrink-0 gap-2 overflow-hidden" role="tablist" aria-label="Meal categories">
+        <div className="home-category-tabs -mx-1 mt-2 flex shrink-0 gap-2 overflow-visible px-1 py-1" role="tablist" aria-label="Meal categories">
           {categories.map((item) => (
             <button
               key={item}
@@ -41,8 +41,8 @@ export function CatalogClient() {
               onClick={() => setCategory(item)}
               className={`min-h-9 shrink-0 cursor-pointer rounded-full border px-4 text-sm transition-all duration-200 ${
                 category === item
-                  ? "-translate-y-0.5 border-brand bg-brand font-semibold text-white shadow-[0_8px_18px_rgba(196,24,30,0.18)]"
-                  : "border-border bg-white text-copy hover:-translate-y-0.5 hover:border-brand-blush hover:bg-brand-tint"
+                  ? "border-brand bg-brand font-semibold text-white shadow-[0_8px_18px_rgba(196,24,30,0.18)]"
+                  : "border-border bg-white text-copy hover:border-brand-blush hover:bg-brand-tint hover:shadow-[0_6px_16px_rgba(196,24,30,0.10)]"
               }`}
             >
               {item}
@@ -50,7 +50,7 @@ export function CatalogClient() {
           ))}
         </div>
 
-        <div className="home-picks-header mt-4 flex shrink-0 items-center gap-3">
+        <div className="home-picks-header mt-3 flex shrink-0 items-center gap-3">
           <h3 className="font-bold leading-tight">Today&apos;s Picks</h3>
           <span className="rounded-full bg-gold-tint px-3 py-1 text-xs font-semibold text-gold">Best Sellers</span>
           <Link href="/menu" className="ml-auto text-sm font-bold text-brand underline underline-offset-4 transition hover:text-brand-deep">
@@ -58,7 +58,7 @@ export function CatalogClient() {
           </Link>
         </div>
 
-        <div key={category} className="home-product-grid mt-3 grid shrink-0 grid-cols-6 items-start gap-4 overflow-hidden">
+        <div key={category} className="home-product-grid mt-3 grid shrink-0 grid-cols-6 items-start gap-4 overflow-visible">
           {visible.map((product) => (
             <div key={product.id} className="menu-card-enter">
               <ProductCard product={product} compact onAdd={() => setBagCount((count) => count + 1)} />
