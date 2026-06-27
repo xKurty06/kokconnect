@@ -3,14 +3,16 @@ import { CatalogClient } from "@/components/catalog-client";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
 
+const DESKTOP_CONTAINER = "mx-auto w-full max-w-[1280px] px-8";
+
 export default function HomePage() {
   return (
     <main className="flex h-dvh min-h-[720px] overflow-hidden bg-white">
       <div className="flex min-h-0 w-full flex-col">
         <SiteHeader active="home" variant="red" showSearch />
 
-        <section className="shrink-0 bg-brand px-[60px] py-5 text-white">
-          <div className="grid h-[274px] w-full grid-cols-[1fr_400px] items-center gap-10">
+        <section className="shrink-0 bg-brand py-5 text-white">
+          <div className={`${DESKTOP_CONTAINER} grid h-[274px] grid-cols-[1fr_400px] items-center gap-10`}>
             <div>
               <p className="text-xs font-bold tracking-wide text-gold-warm">GRIDDLE &amp; GRILL</p>
               <h1 className="mt-2 max-w-xl text-5xl font-bold leading-[0.96] tracking-tight">
