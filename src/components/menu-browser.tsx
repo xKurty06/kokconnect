@@ -1,20 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { ChevronDown, Search, ShoppingBag, X } from "lucide-react";
+import { Check, ChevronDown, Search, ShoppingBag, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { ProductCard } from "@/components/product-card";
 import { categories, products, type ProductCategory } from "@/lib/mock-data";
 
 type Availability = "All Items" | "Available" | "Sold Out";
+type SortOption = "default" | "low" | "high";
+
+const sortOptions: { value: SortOption; label: string; helper: string }[] = [
+  { value: "default", label: "Default", helper: "Recommended order" },
+  { value: "low", label: "Price: Low to High", helper: "Budget first" },
+  { value: "high", label: "Price: High to Low", helper: "Premium first" },
+];
 
 export function MenuBrowser({ initialSearchQuery = "" }: { initialSearchQuery?: string }) {
   const cleanInitialSearch = initialSearchQuery.trim();
   const [category, setCategory] = useState<ProductCategory>("Rice Meals");
   const [availability, setAvailability] = useState<Availability>("All Items");
-  const [sort, setSort] = useState("default");
+  const [sort, setSort] = useState<SortOption>("default");
+  const [sortOpen, setSortOpen] = useState(false);
   const [bagCount, setBagCount] = useState(2);
   const searchQuery = cleanInitialSearch.toLowerCase();
+  const selectedSort = sortOptions.find((option) => option.value === sort) ?? sortOptions[0];
 
   const filtered = useMemo(() => {
     let items = searchQuery
@@ -73,15 +82,55 @@ export function MenuBrowser({ initialSearchQuery = "" }: { initialSearchQuery?: 
                 <Search className="size-3.5" /> {cleanInitialSearch}
               </span>
             )}
-            <label className="relative transition duration-200 focus-within:-translate-y-0.5">
-              <span className="sr-only">Sort meals</span>
-              <select value={sort} onChange={(event) => setSort(event.target.value)} className="h-10 appearance-none rounded-lg border border-border bg-white py-2 pl-4 pr-10 text-sm shadow-sm transition focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-tint">
-                <option value="default">Sort by: Default</option>
-                <option value="low">Price: Low to High</option>
-                <option value="high">Price: High to Low</option>
-              </select>
-              <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted" />
-            </label>
+            <div
+              className="relative min-w-[230px]"
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) setSortOpen(false);
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => setSortOpen((open) => !open)}
+                className={`flex h-11 w-full cursor-pointer items-center justify-between gap-3 rounded-xl border bg-white px-4 text-left text-sm shadow-sm transition hover:-translate-y-0.5 hover:border-brand-blush hover:shadow-md ${sortOpen ? "border-brand-blush ring-4 ring-brand/10" : "border-border"}`}
+                aria-haspopup="listbox"
+                aria-expanded={sortOpen}
+              >
+                <span>
+                  <span className="block text-[11px] font-bold uppercase tracking-[0.14em] text-brand/70">Sort by</span>
+                  <span className="block font-semibold text-ink">{selectedSort.label}</span>
+                </span>
+                <ChevronDown className={`size-4 shrink-0 text-muted transition-transform duration-200 ${sortOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {sortOpen && (
+                <div className="menu-panel-enter absolute right-0 top-[calc(100%+8px)] z-40 w-full overflow-hidden rounded-xl border border-border bg-white p-1 shadow-[0_18px_45px_rgba(17,17,17,0.16)] ring-1 ring-black/5" role="listbox" aria-label="Sort meals">
+                  {sortOptions.map((option) => {
+                    const active = option.value === sort;
+                    return (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => {
+                          setSort(option.value);
+                          setSortOpen(false);
+                        }}
+                        className={`flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-left transition ${active ? "bg-brand-tint text-brand" : "text-copy hover:bg-background hover:text-ink"}`}
+                        role="option"
+                        aria-selected={active}
+                      >
+                        <span className={`grid size-5 shrink-0 place-items-center rounded-full border ${active ? "border-brand bg-brand text-white" : "border-border bg-white"}`}>
+                          {active && <Check className="size-3" />}
+                        </span>
+                        <span className="min-w-0">
+                          <span className="block text-sm font-semibold">{option.label}</span>
+                          <span className="block text-xs text-muted">{option.helper}</span>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
