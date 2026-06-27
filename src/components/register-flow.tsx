@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { AlertCircle, Check, ChevronDown, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { InteractiveMap } from "@/components/map/interactive-map";
+import { InteractiveMap, type MapPosition } from "@/components/map/interactive-map";
 import { Button } from "@/components/ui/button";
 
 interface RegistrationData {
@@ -24,13 +24,16 @@ const initialData: RegistrationData = {
   notes: "",
 };
 
+const DEFAULT_MAP_POSITION: MapPosition = [14.195484, 120.88143];
 const inputClass = "h-11 rounded-lg border border-border bg-background px-4 font-normal shadow-sm transition focus:border-brand-blush focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand/10";
 const labelClass = "grid gap-1.5 text-sm font-semibold";
+const formatPosition = (position: MapPosition) => `Lat: ${position[0].toFixed(6)}, Lon: ${position[1].toFixed(6)}`;
 
 export function RegisterFlow() {
   const [step, setStep] = useState(1);
   const [data, setData] = useState(initialData);
   const [showPassword, setShowPassword] = useState(false);
+  const [mapPosition, setMapPosition] = useState<MapPosition>(DEFAULT_MAP_POSITION);
 
   const update = (field: keyof RegistrationData, value: string) => setData((current) => ({ ...current, [field]: value }));
   const labels = ["Sign Up", "Pin Location", "Review"];
@@ -77,20 +80,20 @@ export function RegisterFlow() {
       </form>}
 
       {step === 2 && <div key="step-2" className="auth-card-enter mt-7 grid grid-cols-2 gap-6">
-        <InteractiveMap className="min-h-[440px] rounded-2xl border-[12px] border-[#e7ede5] shadow-[0_12px_30px_rgba(0,0,0,0.10)]" />
-        <form noValidate className="grid content-start gap-4" onSubmit={(event) => { event.preventDefault(); setStep(3); }}><div><h2 className="text-xl font-bold">Delivery Location Details</h2><p className="mt-1 text-sm text-muted">Specify your exact building, unit, or dorm reference point.</p></div>
-          <label className={labelClass}>Pinned Location Coordinates (Autofilled)<input readOnly value="Lat: 14.195484, Lon: 120.881430 (Near CvSU Campus)" className={inputClass} /></label>
+        <InteractiveMap value={mapPosition} onChange={setMapPosition} popupTitle="Selected delivery location" className="min-h-[440px] rounded-2xl border-[12px] border-[#e7ede5] shadow-[0_12px_30px_rgba(0,0,0,0.10)]" />
+        <form noValidate className="grid content-start gap-4" onSubmit={(event) => { event.preventDefault(); setStep(3); }}><div><h2 className="text-xl font-bold">Delivery Location Details</h2><p className="mt-1 text-sm text-muted">Choose the map location, then add a clear landmark.</p></div>
+          <label className={labelClass}>Selected Coordinates<input readOnly value={formatPosition(mapPosition)} className={inputClass} /></label>
           <label className={labelClass}>Building / Street Name / Block &amp; Lot<input value={data.address} onChange={(event) => update("address", event.target.value)} className={inputClass} /></label>
           <label className="relative grid gap-1.5 text-sm font-semibold">Select Dorm / Landmark<select value={data.landmark} onChange={(event) => update("landmark", event.target.value)} className={`${inputClass} appearance-none pr-10`}><option>CvSU Dormitory Building 3</option><option>Main Gate</option></select><ChevronDown className="absolute bottom-3.5 right-4 size-4 text-muted" /></label>
           <label className={labelClass}>Delivery Notes (Optional)<textarea value={data.notes} onChange={(event) => update("notes", event.target.value)} rows={2} className="resize-none rounded-lg border border-border bg-background p-4 font-normal shadow-sm transition focus:border-brand-blush focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand/10" /></label>
-          <p className="flex gap-2 rounded-lg border border-brand-blush bg-brand-tint p-3 text-xs font-medium text-brand"><AlertCircle className="size-4 shrink-0" />We currently deliver within Indang and CvSU area only.</p>
+          <p className="flex gap-2 rounded-lg border border-brand-blush bg-brand-tint p-3 text-xs font-medium text-brand"><AlertCircle className="size-4 shrink-0" />The coordinate field updates when you choose a new map location.</p>
           <div className="grid grid-cols-2 gap-3"><Button type="button" variant="ghost" onClick={() => setStep(1)}>← Back to Step 1</Button><Button type="submit">Continue to Step 3 →</Button></div>
         </form>
       </div>}
 
       {step === 3 && <div key="step-3" className="auth-card-enter mx-auto mt-7 max-w-xl"><h2 className="text-xl font-bold">Review Your Information</h2><p className="mt-1 text-sm text-muted">Please confirm your details before creating your account.</p>
         <section className="surface-card mt-5 overflow-hidden rounded-xl"><div className="flex justify-between bg-background px-4 py-3 text-xs font-semibold"><span>PERSONAL INFORMATION</span><button onClick={() => setStep(1)} className="text-brand hover:text-brand-deep">Edit</button></div><dl className="divide-y divide-border px-4 text-sm"><div className="py-3"><dt className="text-muted">Full Name</dt><dd className="font-semibold">{data.name}</dd></div><div className="py-3"><dt className="text-muted">Email Address</dt><dd className="font-semibold">{data.email}</dd></div><div className="py-3"><dt className="text-muted">Mobile Number</dt><dd className="font-semibold">{data.phone}</dd></div></dl></section>
-        <section className="surface-card mt-5 overflow-hidden rounded-xl"><div className="flex justify-between bg-background px-4 py-3 text-xs font-semibold"><span>DEFAULT DELIVERY LOCATION</span><button onClick={() => setStep(2)} className="text-brand hover:text-brand-deep">Edit</button></div><dl className="divide-y divide-border px-4 text-sm"><div className="py-3"><dt className="text-muted">Pinned Coordinates</dt><dd className="font-semibold">Lat: 14.195432, Lon: 120.879431</dd></div><div className="py-3"><dt className="text-muted">Building / Landmark</dt><dd className="font-semibold">{data.address}</dd></div><div className="py-3"><dt className="text-muted">Dorm / Reference</dt><dd className="font-semibold">{data.landmark}</dd></div></dl></section>
+        <section className="surface-card mt-5 overflow-hidden rounded-xl"><div className="flex justify-between bg-background px-4 py-3 text-xs font-semibold"><span>DEFAULT DELIVERY LOCATION</span><button onClick={() => setStep(2)} className="text-brand hover:text-brand-deep">Edit</button></div><dl className="divide-y divide-border px-4 text-sm"><div className="py-3"><dt className="text-muted">Selected Coordinates</dt><dd className="font-semibold">{formatPosition(mapPosition)}</dd></div><div className="py-3"><dt className="text-muted">Building / Landmark</dt><dd className="font-semibold">{data.address}</dd></div><div className="py-3"><dt className="text-muted">Dorm / Reference</dt><dd className="font-semibold">{data.landmark}</dd></div></dl></section>
         <label className="mt-5 flex gap-3 rounded-lg bg-background p-3 text-xs text-copy"><input type="checkbox" defaultChecked className="size-4 accent-brand" />By creating an account, you agree to the Terms &amp; Conditions and Privacy Policy.</label><Button className="mt-5 w-full" onClick={() => setStep(4)}>Create My Account</Button><button className="mx-auto mt-3 block min-h-11 text-sm text-muted hover:text-brand" onClick={() => setStep(2)}>← Back to Step 2</button>
       </div>}
     </div>
