@@ -13,7 +13,7 @@ export default function HomePage() {
 
         <section className="shrink-0 bg-brand py-6 text-white">
           <div className={`${DESKTOP_CONTAINER} grid h-[300px] grid-cols-[1fr_450px] items-center gap-12`}>
-            <div>
+            <div className="home-hero-copy">
               <p className="text-xs font-bold tracking-wide text-gold-warm">GRIDDLE &amp; GRILL</p>
               <h1 className="mt-3 max-w-xl text-6xl font-bold leading-[0.96] tracking-tight">
                 Order Fresh.
@@ -33,7 +33,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative aspect-[11/8] overflow-hidden rounded-xl bg-brand-deep shadow-inner">
+            <div className="home-hero-media relative aspect-[11/8] overflow-hidden rounded-xl bg-brand-deep shadow-inner">
               <Image
                 src="/assets/grilled-chicken.jpg"
                 alt="Freshly grilled chicken served with herbs and vegetables"
