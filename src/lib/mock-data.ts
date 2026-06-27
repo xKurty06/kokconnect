@@ -21,7 +21,7 @@ export const categories: ProductCategory[] = [
 
 export const products: Product[] = [
   { id: "chicken-inasal", name: "Chicken Inasal", category: "Best Seller", price: 99, available: true, prepTime: "20–25 min", image: "/assets/grilled-chicken.jpg" },
-  { id: "kropek", name: "Kropek", category: "Appetizers", price: 40, available: true, prepTime: "10–15 min", image: "/public/assets/kropek.jpg" },
+  { id: "kropek", name: "Kropek", category: "Appetizers", price: 40, available: true, prepTime: "10–15 min", image: "/assets/kropek.jpg" },
   { id: "breaded-porkchop", name: "Breaded Porkchop", category: "Rice Meals", price: 120, available: false, prepTime: "25–30 min", image: "/assets/pork-rice-meal.jpg" },
   { id: "onion-rings", name: "Onion Rings", category: "Appetizers", price: 40, available: true, prepTime: "15–20 min", image: "/assets/onion-rings.jpg" },
   { id: "sizzling-sisig", name: "Sizzling Sisig", category: "Rice Meals", price: 150, available: true, prepTime: "20–25 min", image: "/assets/rice-bowl.jpg" },
