@@ -16,7 +16,7 @@ export function ProductCard({
   onAdd?: (product: Product) => void;
 }) {
   return (
-    <article className="group min-w-0 overflow-hidden rounded-xl bg-white shadow-[0_4px_12px_rgba(0,0,0,0.07)]">
+    <article className="group min-w-0 overflow-hidden rounded-xl bg-white shadow-[0_4px_12px_rgba(0,0,0,0.07)] transition duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
       <div
         className={`relative grid place-items-center overflow-hidden bg-border ${
           compact ? "aspect-[4/3]" : menuDense ? "aspect-[5/3]" : "aspect-[3/2]"
@@ -27,7 +27,7 @@ export function ProductCard({
           alt={`${product.name} meal`}
           fill
           sizes={menuDense ? "260px" : "320px"}
-          className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+          className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
         />
 
         {!compact && (
