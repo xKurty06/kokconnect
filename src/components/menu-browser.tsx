@@ -65,8 +65,8 @@ export function MenuBrowser({ initialSearchQuery = "" }: { initialSearchQuery?: 
         </div>
       </aside>
 
-      <main className="relative min-w-0 bg-background px-6 pb-20">
-        <div key={`${animationKey}-heading`} className="menu-panel-enter flex flex-wrap items-center justify-between gap-3 border-b border-border py-4">
+      <main className="relative min-w-0 overflow-visible bg-background px-6 pb-20">
+        <div key={`${animationKey}-heading`} className="menu-panel-enter relative z-40 flex flex-wrap items-center justify-between gap-3 border-b border-border bg-background py-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand/70">Cooked to order</p>
             <h1 className="mt-1 text-lg font-bold">{heading} <span className="text-muted">({filtered.length})</span></h1>
@@ -103,7 +103,7 @@ export function MenuBrowser({ initialSearchQuery = "" }: { initialSearchQuery?: 
               </button>
 
               {sortOpen && (
-                <div className="menu-panel-enter absolute right-0 top-[calc(100%+8px)] z-40 w-full overflow-hidden rounded-xl border border-border bg-white p-1 shadow-[0_18px_45px_rgba(17,17,17,0.16)] ring-1 ring-black/5" role="listbox" aria-label="Sort meals">
+                <div className="menu-panel-enter absolute right-0 top-[calc(100%+8px)] z-[70] w-full overflow-hidden rounded-xl border border-border bg-white p-1 shadow-[0_18px_45px_rgba(17,17,17,0.16)] ring-1 ring-black/5" role="listbox" aria-label="Sort meals">
                   {sortOptions.map((option) => {
                     const active = option.value === sort;
                     return (
@@ -135,7 +135,7 @@ export function MenuBrowser({ initialSearchQuery = "" }: { initialSearchQuery?: 
         </div>
 
         {filtered.length > 0 ? (
-          <div key={animationKey} className="menu-grid-enter grid grid-cols-5 gap-4 py-5">
+          <div key={animationKey} className="menu-grid-enter relative z-0 grid grid-cols-5 gap-4 py-5">
             {filtered.map((product) => (
               <div key={product.id} className="menu-card-enter">
                 <ProductCard product={product} menuDense onAdd={() => setBagCount((count) => count + 1)} />
@@ -143,7 +143,7 @@ export function MenuBrowser({ initialSearchQuery = "" }: { initialSearchQuery?: 
             ))}
           </div>
         ) : (
-          <div className="menu-panel-enter mt-6 rounded-xl border border-dashed border-border bg-white p-10 text-center shadow-sm">
+          <div className="menu-panel-enter relative z-0 mt-6 rounded-xl border border-dashed border-border bg-white p-10 text-center shadow-sm">
             <p className="text-lg font-bold">No meals found</p>
             <p className="mt-2 text-sm text-muted">Try another keyword or clear the search.</p>
             <Link href="/menu" className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-brand px-5 text-sm font-semibold text-white hover:bg-brand-deep">
