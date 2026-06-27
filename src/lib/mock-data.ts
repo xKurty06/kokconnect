@@ -28,7 +28,7 @@ export const products: Product[] = [
   { id: "pork-barbeque", name: "Pork Barbeque", category: "Rice Meals", price: 95, available: true, prepTime: "20–25 min", image: "/assets/pork-barbecue.jpg" },
   { id: "pancit", name: "Pancit", category: "Group Meals", price: 125, available: true, prepTime: "25–30 min", image: "/assets/pancit-noodles.jpg" },
   { id: "bangus", name: "Bangus", category: "Rice Meals", price: 115, available: true, prepTime: "25–30 min", image: "/assets/bangus.jpg" },
-  { id: "iced-americano", name: "Iced Americano", category: "Drinks", price: 65, available: true, prepTime: "10–15 min", image: "/assets/iced-coffee.jpg" },
+  { id: "iced-americano", name: "Iced Americano", category: "Drinks", price: 65, available: true, prepTime: "10–15 min", image: "/assets/iced-americano.jpg" },
   { id: "liempo", name: "Liempo", category: "Rice Meals", price: 130, available: true, prepTime: "20–25 min", image: "/assets/liempo.jpg" },
   { id: "iced-tea", name: "Iced Tea", category: "Drinks", price: 40, available: true, prepTime: "5–10 min", image: "/assets/iced-coffee.jpg" },
   { id: "extra-rice", name: "Steamed Rice", category: "Extras", price: 15, available: true, prepTime: "5 min", image: "/assets/rice-bowl.jpg" },
