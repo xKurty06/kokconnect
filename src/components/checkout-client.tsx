@@ -47,7 +47,7 @@ export function CheckoutClient() {
           <div className={summaryRowClass}><dt className="text-muted">Delivery Surcharge</dt><dd className="text-right tabular-nums">{formatPrice(25)}</dd></div>
           <div className={summaryRowClass}><dt className="text-muted">Voucher Discount</dt><dd className="text-right tabular-nums text-success">- {formatPrice(40)}</dd></div>
         </dl>
-        <div className={`ml-auto grid max-w-[300px] rounded-xl bg-brand-tint px-4 py-3 text-sm ${summaryRowClass}`}>
+        <div className={`ml-auto mt-3 grid max-w-[300px] rounded-xl bg-brand-tint px-4 py-3 text-sm ${summaryRowClass}`}>
           <strong>Total</strong>
           <strong className="text-right font-bold tabular-nums text-brand">{formatPrice(total)}</strong>
         </div>
@@ -70,7 +70,7 @@ export function CheckoutClient() {
           </div>
         </fieldset>
         <label className="mt-5 grid gap-2 text-sm font-medium">Apply Discount Voucher Code<span className="relative"><Tag className="absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted" /><input className="form-field h-12 w-full rounded-lg pl-10 pr-4 font-normal placeholder:text-muted" placeholder="e.g. KOKSFREEDEL" /></span></label>
-        <div className="mt-5 grid grid-cols-[1fr_1.7fr] gap-3"><Link href="/cart" className="inline-flex min-h-12 items-center justify-center rounded-full border border-border bg-white font-semibold text-copy hover:bg-background">← Cancel</Link><ButtonLink href="/checkout/location" className="min-h-12">Confirm and Place Order ({formatPrice(total)})</ButtonLink></div>
+        <div className="mt-5 grid grid-cols-[1fr_1.7fr] gap-3"><Link href="/cart" className="inline-flex min-h-12 items-center justify-center rounded-full border border-border bg-white font-semibold text-copy hover:bg-background">← Cancel</Link><ButtonLink href="/order-tracking" className="min-h-12">Confirm and Place Order ({formatPrice(total)})</ButtonLink></div>
       </section>
       <aside className="surface-card rounded-xl p-5">
         <h2 className="border-b border-border pb-4 font-bold">Delivering To</h2>
