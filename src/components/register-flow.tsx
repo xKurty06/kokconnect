@@ -79,15 +79,15 @@ export function RegisterFlow() {
         <p className="mt-4 text-center text-xs text-muted">Already have an account? <Link href="/login" className="font-semibold text-brand hover:text-brand-deep">Log In</Link></p>
       </form>}
 
-      {step === 2 && <div key="step-2" className="auth-card-enter mt-7 grid grid-cols-2 gap-6">
-        <InteractiveMap value={mapPosition} onChange={setMapPosition} popupTitle="Selected delivery location" className="min-h-[440px] rounded-2xl border-[12px] border-[#e7ede5] shadow-[0_12px_30px_rgba(0,0,0,0.10)]" />
+      {step === 2 && <div key="step-2" className="auth-card-enter mt-7 grid grid-cols-[minmax(0,1.2fr)_minmax(330px,0.8fr)] gap-7">
+        <InteractiveMap value={mapPosition} onChange={setMapPosition} popupTitle="Selected delivery location" className="min-h-[480px] rounded-2xl border-[12px] border-[#e7ede5] shadow-[0_12px_30px_rgba(0,0,0,0.10)]" />
         <form noValidate className="grid content-start gap-4" onSubmit={(event) => { event.preventDefault(); setStep(3); }}><div><h2 className="text-xl font-bold">Delivery Location Details</h2><p className="mt-1 text-sm text-muted">Choose the map location, then add a clear landmark.</p></div>
           <label className={labelClass}>Selected Coordinates<input readOnly value={formatPosition(mapPosition)} className={inputClass} /></label>
           <label className={labelClass}>Building / Street Name / Block &amp; Lot<input value={data.address} onChange={(event) => update("address", event.target.value)} className={inputClass} /></label>
           <label className="relative grid gap-1.5 text-sm font-semibold">Select Dorm / Landmark<select value={data.landmark} onChange={(event) => update("landmark", event.target.value)} className={`${inputClass} appearance-none pr-10`}><option>CvSU Dormitory Building 3</option><option>Main Gate</option></select><ChevronDown className="absolute bottom-3.5 right-4 size-4 text-muted" /></label>
           <label className={labelClass}>Delivery Notes (Optional)<textarea value={data.notes} onChange={(event) => update("notes", event.target.value)} rows={2} className="resize-none rounded-lg border border-border bg-background p-4 font-normal shadow-sm transition focus:border-brand-blush focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand/10" /></label>
           <p className="flex gap-2 rounded-lg border border-brand-blush bg-brand-tint p-3 text-xs font-medium text-brand"><AlertCircle className="size-4 shrink-0" />The coordinate field updates when you choose a new map location.</p>
-          <div className="grid grid-cols-2 gap-3"><Button type="button" variant="ghost" onClick={() => setStep(1)}>← Back to Step 1</Button><Button type="submit">Continue to Step 3 →</Button></div>
+          <div className="grid grid-cols-[1fr_1.45fr] gap-3"><Button type="button" variant="ghost" onClick={() => setStep(1)} className="whitespace-nowrap">← Back</Button><Button type="submit" className="whitespace-nowrap">Continue to Step 3 →</Button></div>
         </form>
       </div>}
 
