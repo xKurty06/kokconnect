@@ -31,7 +31,7 @@ export const products: Product[] = [
   { id: "iced-americano", name: "Iced Americano", category: "Drinks", price: 65, available: true, prepTime: "10–15 min", image: "/assets/iced-americano.jpg" },
   { id: "liempo", name: "Liempo", category: "Rice Meals", price: 130, available: true, prepTime: "20–25 min", image: "/assets/liempo.jpg" },
   { id: "iced-tea", name: "Iced Tea", category: "Drinks", price: 40, available: true, prepTime: "5–10 min", image: "/assets/iced-coffee.jpg" },
-  { id: "extra-rice", name: "Steamed Rice", category: "Extras", price: 15, available: true, prepTime: "5 min", image: "/assets/rice-bowl.jpg" },
+  { id: "extra-rice", name: "Steamed Rice", category: "Extras", price: 15, available: true, prepTime: "5 min", image: "/assets/steamed-rice.jpg" },
   { id: "crispy-fried-chicken", name: "Crispy Fried Chicken", category: "Rice Meals", price: 99, available: true, prepTime: "20–25 min", image: "/assets/chicken-wings.jpg" },
   { id: "pork-sisig-meal", name: "Pork Sisig Rice Meal", category: "Rice Meals", price: 150, available: true, prepTime: "20–25 min", image: "/assets/pork-sisig-rice.jpg" },
   { id: "lechon-kawali", name: "Lechon Kawali Meal", category: "Rice Meals", price: 165, available: true, prepTime: "25–30 min", image: "/assets/lechon-kawali.jpg" },
