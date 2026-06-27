@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import "@fontsource-variable/inter";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
 import "./layout-fixes.css";
