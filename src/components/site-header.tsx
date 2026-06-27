@@ -6,14 +6,18 @@ interface SiteHeaderProps {
   active?: "home" | "menu";
   variant?: "red" | "white";
   showSearch?: boolean;
+  contained?: boolean;
 }
 
-export function SiteHeader({ active, variant = "white", showSearch = false }: SiteHeaderProps) {
+export function SiteHeader({ active, variant = "white", showSearch = false, contained = false }: SiteHeaderProps) {
   const red = variant === "red";
+  const innerClass = contained
+    ? "mx-auto flex h-full w-full max-w-[1280px] items-center justify-between gap-5 px-8"
+    : "flex h-full w-full items-center justify-between gap-5 px-[60px]";
 
   return (
     <header className={`h-[68px] border-b ${red ? "border-brand-deep bg-brand text-white shadow-lg" : "border-border bg-white text-ink"}`}>
-      <div className="mx-auto flex h-full w-full max-w-[1280px] items-center justify-between gap-5 px-8">
+      <div className={innerClass}>
         <Link href="/" className="flex shrink-0 items-center gap-2 text-sm font-bold" aria-label="Kuya Kok's home">
           <Image src="/assets/kuya-kok-logo.png" alt="Kuya Kok's logo" width={44} height={44} className="size-11 rounded-full object-contain" priority />
           <span>Kuya Kok&apos;s</span>
