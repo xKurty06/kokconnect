@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Search, X } from "lucide-react";
+import { FormEvent, useState } from "react";
 
 interface SiteHeaderProps {
   active?: "home" | "menu";
@@ -13,6 +17,8 @@ interface SiteHeaderProps {
 
 export function SiteHeader({ active, variant = "white", showSearch = false, searchDefaultValue = "", contained = false, sticky = false }: SiteHeaderProps) {
   const red = variant === "red";
+  const router = useRouter();
+  const [searchValue, setSearchValue] = useState(searchDefaultValue);
   const innerClass = contained
     ? "mx-auto flex h-full w-full max-w-[1560px] items-center justify-between gap-5 px-8"
     : "flex h-full w-full items-center justify-between gap-5 px-[60px]";
@@ -20,6 +26,17 @@ export function SiteHeader({ active, variant = "white", showSearch = false, sear
     ? "border-brand-deep bg-brand/95 text-white shadow-lg backdrop-blur"
     : "border-border bg-white/95 text-ink backdrop-blur";
   const activeLine = red ? "bg-gold-warm" : "bg-brand";
+
+  const submitSearch = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const query = searchValue.trim();
+    router.push(query ? `/menu?q=${encodeURIComponent(query)}` : "/menu");
+  };
+
+  const clearSearch = () => {
+    setSearchValue("");
+    if (searchDefaultValue) router.push("/menu");
+  };
 
   return (
     <header className={`${sticky ? "sticky top-0 z-50" : ""} h-[68px] border-b ${headerClass}`}>
@@ -32,10 +49,27 @@ export function SiteHeader({ active, variant = "white", showSearch = false, sear
         </Link>
 
         {showSearch && (
-          <form action="/menu" method="get" role="search" className="relative w-80 transition duration-200 focus-within:-translate-y-0.5 focus-within:scale-[1.01]">
+          <form onSubmit={submitSearch} role="search" className="relative w-80 transition duration-200 focus-within:-translate-y-0.5 focus-within:scale-[1.01]">
             <label htmlFor="site-search" className="sr-only">Search for meals</label>
             <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted transition-colors" aria-hidden="true" />
-            <input id="site-search" name="q" defaultValue={searchDefaultValue} className="h-[38px] w-full rounded-full border border-white/15 bg-white pl-10 pr-4 text-sm text-ink shadow-sm placeholder:text-muted transition duration-200 focus:border-gold-warm focus:shadow-[0_8px_22px_rgba(0,0,0,0.10)] focus:outline-none" placeholder="Search for meals" />
+            <input
+              id="site-search"
+              name="q"
+              value={searchValue}
+              onChange={(event) => setSearchValue(event.target.value)}
+              className="h-[38px] w-full rounded-full border border-white/15 bg-white pl-10 pr-10 text-sm text-ink shadow-sm placeholder:text-muted transition duration-200 focus:border-gold-warm focus:shadow-[0_8px_22px_rgba(0,0,0,0.10)] focus:outline-none"
+              placeholder="Search for meals"
+            />
+            {searchValue && (
+              <button
+                type="button"
+                onClick={clearSearch}
+                className="absolute right-1.5 top-1/2 grid size-8 -translate-y-1/2 cursor-pointer place-items-center rounded-full text-muted transition hover:bg-brand-tint hover:text-brand"
+                aria-label="Clear search"
+              >
+                <X className="size-4" />
+              </button>
+            )}
           </form>
         )}
 
