@@ -9,7 +9,7 @@ const DESKTOP_CONTAINER = "mx-auto w-full max-w-[1560px] px-8";
 export default function HomePage() {
   return (
     <div className="min-h-dvh bg-white">
-      <main className="flex min-h-[720px] bg-white">
+      <main className="flex min-h-dvh bg-white">
         <div className="flex min-h-0 w-full flex-col">
           <SiteHeader active="home" variant="red" showSearch contained />
 
