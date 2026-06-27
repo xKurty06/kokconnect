@@ -22,6 +22,8 @@ export function MenuBrowser() {
     return items.length ? items : products.slice(0, 8);
   }, [availability, category, sort]);
 
+  const animationKey = `${category}-${availability}-${sort}`;
+
   return (
     <div className="grid min-h-[calc(100dvh-68px)] w-full grid-cols-[210px_minmax(0,1fr)]">
       <aside className="sticky top-[68px] h-[calc(100dvh-68px)] self-start overflow-y-auto border-r border-border bg-white" aria-label="Menu filters">
@@ -42,7 +44,7 @@ export function MenuBrowser() {
       </aside>
 
       <main className="relative min-w-0 bg-background px-6 pb-20">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border py-4">
+        <div key={`${animationKey}-heading`} className="menu-panel-enter flex flex-wrap items-center justify-between gap-3 border-b border-border py-4">
           <h1 className="text-lg font-bold">{category} <span className="text-muted">({filtered.length})</span></h1>
           <label className="relative">
             <span className="sr-only">Sort meals</span>
@@ -54,8 +56,12 @@ export function MenuBrowser() {
             <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted" />
           </label>
         </div>
-        <div className="grid grid-cols-5 gap-4 py-5">
-          {filtered.map((product) => <ProductCard key={product.id} product={product} menuDense onAdd={() => setBagCount((count) => count + 1)} />)}
+        <div key={animationKey} className="menu-grid-enter grid grid-cols-5 gap-4 py-5">
+          {filtered.map((product) => (
+            <div key={product.id} className="menu-card-enter">
+              <ProductCard product={product} menuDense onAdd={() => setBagCount((count) => count + 1)} />
+            </div>
+          ))}
         </div>
         <a href="/cart" className="fixed bottom-5 right-8 z-30 inline-flex min-h-12 items-center gap-2 rounded-full bg-brand px-5 text-sm font-semibold text-white shadow-xl">
           <ShoppingBag className="size-4" /> My Bag ({bagCount})
