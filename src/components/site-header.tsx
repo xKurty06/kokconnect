@@ -6,11 +6,12 @@ interface SiteHeaderProps {
   active?: "home" | "menu";
   variant?: "red" | "white";
   showSearch?: boolean;
+  searchDefaultValue?: string;
   contained?: boolean;
   sticky?: boolean;
 }
 
-export function SiteHeader({ active, variant = "white", showSearch = false, contained = false, sticky = false }: SiteHeaderProps) {
+export function SiteHeader({ active, variant = "white", showSearch = false, searchDefaultValue = "", contained = false, sticky = false }: SiteHeaderProps) {
   const red = variant === "red";
   const innerClass = contained
     ? "mx-auto flex h-full w-full max-w-[1560px] items-center justify-between gap-5 px-8"
@@ -31,11 +32,11 @@ export function SiteHeader({ active, variant = "white", showSearch = false, cont
         </Link>
 
         {showSearch && (
-          <label className="relative w-80 transition duration-200 focus-within:-translate-y-0.5 focus-within:scale-[1.01]">
-            <span className="sr-only">Search for meals</span>
+          <form action="/menu" method="get" role="search" className="relative w-80 transition duration-200 focus-within:-translate-y-0.5 focus-within:scale-[1.01]">
+            <label htmlFor="site-search" className="sr-only">Search for meals</label>
             <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted transition-colors" aria-hidden="true" />
-            <input className="h-[38px] w-full rounded-full border border-white/15 bg-white pl-10 pr-4 text-sm text-ink shadow-sm placeholder:text-muted transition duration-200 focus:border-gold-warm focus:shadow-[0_8px_22px_rgba(0,0,0,0.10)] focus:outline-none" placeholder="Search for meals" />
-          </label>
+            <input id="site-search" name="q" defaultValue={searchDefaultValue} className="h-[38px] w-full rounded-full border border-white/15 bg-white pl-10 pr-4 text-sm text-ink shadow-sm placeholder:text-muted transition duration-200 focus:border-gold-warm focus:shadow-[0_8px_22px_rgba(0,0,0,0.10)] focus:outline-none" placeholder="Search for meals" />
+          </form>
         )}
 
         <nav className="flex items-center gap-8 text-sm" aria-label="Primary navigation">
