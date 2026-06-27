@@ -13,9 +13,9 @@ export default function HomePage() {
         <div className="flex min-h-0 w-full flex-col">
           <SiteHeader active="home" variant="red" showSearch contained />
 
-          <section className="relative z-10 shrink-0 overflow-visible bg-brand pt-6 text-white">
+          <section className="relative z-10 shrink-0 overflow-visible bg-brand pt-4 text-white">
             <div
-              className={`${DESKTOP_CONTAINER} grid min-h-[390px] grid-cols-[1fr_690px] items-center gap-12 pb-10`}
+              className={`${DESKTOP_CONTAINER} grid min-h-[330px] grid-cols-[1fr_690px] items-center gap-12 pb-0`}
             >
               <div className="home-hero-copy relative z-20">
                 <p className="text-xs font-bold tracking-wide text-gold-warm">
@@ -48,12 +48,12 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="home-hero-media relative h-[430px] overflow-visible">
-                <div className="absolute right-14 top-4 h-80 w-80 rounded-full bg-gold-warm/20 blur-3xl" />
-                <div className="absolute bottom-8 right-20 h-80 w-80 rounded-full bg-black/15 blur-3xl" />
-                <div className="absolute right-8 top-4 h-[390px] w-[390px] rounded-full bg-white/8 blur-[90px]" />
+              <div className="home-hero-media relative h-[330px] overflow-visible">
+                <div className="absolute right-14 top-0 h-80 w-80 rounded-full bg-gold-warm/20 blur-3xl" />
+                <div className="absolute bottom-0 right-20 h-80 w-80 rounded-full bg-black/15 blur-3xl" />
+                <div className="absolute right-8 top-0 h-[390px] w-[390px] rounded-full bg-white/8 blur-[90px]" />
 
-                <div className="absolute right-[-24px] top-[-84px] z-30 h-[750px] w-[750px]">
+                <div className="absolute right-[-24px] top-[-124px] z-30 h-[750px] w-[750px]">
                   <div className="absolute bottom-[106px] left-1/2 h-16 w-[340px] -translate-x-1/2 rounded-full bg-black/25 blur-2xl" />
                   <Image
                     src="/assets/grilled-chicken-cutout.png"
@@ -70,7 +70,7 @@ export default function HomePage() {
             </div>
           </section>
 
-          <div className="relative z-20 -mt-2 bg-white pt-4">
+          <div className="relative z-20 bg-white pt-4">
             <CatalogClient />
           </div>
         </div>
