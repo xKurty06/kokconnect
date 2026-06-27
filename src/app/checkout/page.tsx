@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CheckoutClient } from "@/components/checkout-client";
+import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = { title: "Checkout" };
@@ -14,6 +15,7 @@ export default function CheckoutPage() {
         <p className="mt-1 text-sm text-muted">Confirm the order details and preferred payment option.</p>
         <div className="mt-6"><CheckoutClient /></div>
       </main>
+      <SiteFooter />
     </div>
   );
 }
