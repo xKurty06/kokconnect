@@ -37,7 +37,7 @@ export function RegisterFlow() {
 
   const update = (field: keyof RegistrationData, value: string) => setData((current) => ({ ...current, [field]: value }));
   const labels = ["Sign Up", "Pin Location", "Review"];
-  const cardWidth = step === 2 ? "max-w-[960px]" : "max-w-[860px]";
+  const cardWidth = step === 2 ? "max-w-[900px]" : "max-w-[560px]";
 
   const renderShell = (children: ReactNode) => (
     <main className="auth-shell-bg grid min-h-dvh place-items-center px-4 py-10">
@@ -53,7 +53,7 @@ export function RegisterFlow() {
 
   if (step === 4) {
     return renderShell(
-      <div className="auth-card-enter mx-auto max-w-lg p-10 text-center">
+      <div className="auth-card-enter mx-auto max-w-lg p-9 text-center">
         <div className="mx-auto grid size-20 place-items-center rounded-full border-8 border-success/15 bg-success text-white shadow-[0_12px_28px_rgba(45,189,98,0.20)]"><Check className="size-9" /></div>
         <h1 className="mt-6 text-3xl font-bold">Account Created!</h1>
         <p className="mt-1 font-semibold">Welcome to Kuya Kok&apos;s, Juan!</p>
@@ -65,12 +65,12 @@ export function RegisterFlow() {
   }
 
   return renderShell(
-    <div className="p-8">
+    <div className={`${step === 2 ? "p-7" : "p-8"}`}>
       <div className="text-center">
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand/70">New customer setup</p>
         <h1 className="mt-1 text-2xl font-bold">Create Account</h1>
       </div>
-      <ol className="mx-auto mt-5 grid max-w-lg grid-cols-3" aria-label="Registration progress">
+      <ol className="mx-auto mt-5 grid max-w-md grid-cols-3" aria-label="Registration progress">
         {labels.map((label, index) => {
           const number = index + 1;
           const done = step > number;
@@ -79,11 +79,11 @@ export function RegisterFlow() {
         })}
       </ol>
 
-      {step === 1 && <form key="step-1" noValidate className="auth-card-enter mx-auto mt-6 max-w-2xl" onSubmit={(event) => { event.preventDefault(); setStep(2); }}>
-        <div className="grid grid-cols-2 gap-4">
+      {step === 1 && <form key="step-1" noValidate className="auth-card-enter mx-auto mt-6 max-w-sm" onSubmit={(event) => { event.preventDefault(); setStep(2); }}>
+        <div className="grid gap-4">
           <label className={labelClass}>Full Name<input value={data.name} onChange={(event) => update("name", event.target.value)} autoComplete="name" className={inputClass} /></label>
           <label className={labelClass}>Email Address<input type="email" value={data.email} onChange={(event) => update("email", event.target.value)} autoComplete="email" className={inputClass} /></label>
-          <label className={`${labelClass} col-span-2`}>Mobile Number<input type="tel" value={data.phone} onChange={(event) => update("phone", event.target.value)} autoComplete="tel" className={inputClass} /></label>
+          <label className={labelClass}>Mobile Number<input type="tel" value={data.phone} onChange={(event) => update("phone", event.target.value)} autoComplete="tel" className={inputClass} /></label>
           <label className={labelClass}>Password<span className="relative"><input type={showPassword ? "text" : "password"} placeholder="Create a strong password" autoComplete="new-password" className={`${inputClass} w-full pr-12`} /><button type="button" onClick={() => setShowPassword((value) => !value)} className="absolute right-1 top-0 grid size-11 place-items-center rounded-lg text-muted hover:bg-brand-tint hover:text-brand" aria-label={showPassword ? "Hide password" : "Show password"}>{showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}</button></span></label>
           <label className={labelClass}>Confirm Password<input type="password" placeholder="Re-enter password" autoComplete="new-password" className={inputClass} /></label>
         </div>
@@ -92,8 +92,8 @@ export function RegisterFlow() {
         <p className="mt-4 text-center text-xs text-muted">Already have an account? <Link href="/login" className="font-semibold text-brand hover:text-brand-deep">Log In</Link></p>
       </form>}
 
-      {step === 2 && <div key="step-2" className="auth-card-enter mt-7 grid grid-cols-[minmax(0,1.2fr)_minmax(330px,0.8fr)] gap-7">
-        <InteractiveMap value={mapPosition} onChange={setMapPosition} popupTitle="Selected delivery location" className="min-h-[480px] rounded-2xl border-[12px] border-[#e7ede5] shadow-[0_12px_30px_rgba(0,0,0,0.10)]" />
+      {step === 2 && <div key="step-2" className="auth-card-enter mt-7 grid grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] gap-6">
+        <InteractiveMap value={mapPosition} onChange={setMapPosition} popupTitle="Selected delivery location" className="min-h-[460px] rounded-2xl border-[12px] border-[#e7ede5] shadow-[0_12px_30px_rgba(0,0,0,0.10)]" />
         <form noValidate className="grid content-start gap-4" onSubmit={(event) => { event.preventDefault(); setStep(3); }}><div><h2 className="text-xl font-bold">Delivery Location Details</h2><p className="mt-1 text-sm text-muted">Choose the map location, then add a clear landmark.</p></div>
           <label className={labelClass}>Selected Coordinates<input readOnly value={formatPosition(mapPosition)} className={inputClass} /></label>
           <label className={labelClass}>Building / Street Name / Block &amp; Lot<input value={data.address} onChange={(event) => update("address", event.target.value)} className={inputClass} /></label>
@@ -104,7 +104,7 @@ export function RegisterFlow() {
         </form>
       </div>}
 
-      {step === 3 && <div key="step-3" className="auth-card-enter mx-auto mt-7 max-w-xl"><h2 className="text-xl font-bold">Review Your Information</h2><p className="mt-1 text-sm text-muted">Please confirm your details before creating your account.</p>
+      {step === 3 && <div key="step-3" className="auth-card-enter mx-auto mt-7 max-w-md"><h2 className="text-xl font-bold">Review Your Information</h2><p className="mt-1 text-sm text-muted">Please confirm your details before creating your account.</p>
         <section className="surface-card mt-5 overflow-hidden rounded-xl"><div className="flex justify-between bg-background px-4 py-3 text-xs font-semibold"><span>PERSONAL INFORMATION</span><button onClick={() => setStep(1)} className="text-brand hover:text-brand-deep">Edit</button></div><dl className="divide-y divide-border px-4 text-sm"><div className="py-3"><dt className="text-muted">Full Name</dt><dd className="font-semibold">{data.name}</dd></div><div className="py-3"><dt className="text-muted">Email Address</dt><dd className="font-semibold">{data.email}</dd></div><div className="py-3"><dt className="text-muted">Mobile Number</dt><dd className="font-semibold">{data.phone}</dd></div></dl></section>
         <section className="surface-card mt-5 overflow-hidden rounded-xl"><div className="flex justify-between bg-background px-4 py-3 text-xs font-semibold"><span>DEFAULT DELIVERY LOCATION</span><button onClick={() => setStep(2)} className="text-brand hover:text-brand-deep">Edit</button></div><dl className="divide-y divide-border px-4 text-sm"><div className="py-3"><dt className="text-muted">Selected Coordinates</dt><dd className="font-semibold">{formatPosition(mapPosition)}</dd></div><div className="py-3"><dt className="text-muted">Building / Landmark</dt><dd className="font-semibold">{data.address}</dd></div><div className="py-3"><dt className="text-muted">Dorm / Reference</dt><dd className="font-semibold">{data.landmark}</dd></div></dl></section>
         <label className="mt-5 flex gap-3 rounded-lg bg-background p-3 text-xs text-copy"><input type="checkbox" defaultChecked className="size-4 accent-brand" />By creating an account, you agree to the Terms &amp; Conditions and Privacy Policy.</label><Button className="mt-5 w-full" onClick={() => setStep(4)}>Create My Account</Button><button className="mx-auto mt-3 block min-h-11 text-sm text-muted hover:text-brand" onClick={() => setStep(2)}>← Back to Step 2</button>
