@@ -96,6 +96,14 @@ a:active {
   animation: reveal-soft 320ms ease-out both;
 }
 
+.menu-panel-enter {
+  animation: menu-panel-enter 260ms ease-out both;
+}
+
+.menu-card-enter {
+  animation: menu-card-enter 280ms ease-out both;
+}
+
 @keyframes page-enter {
   from {
     opacity: 0;
@@ -117,6 +125,30 @@ a:active {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes menu-panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menu-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
