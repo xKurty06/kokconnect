@@ -31,17 +31,17 @@ export function MenuBrowser() {
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand/70">Categories</p>
           <h2 className="mt-1 text-lg font-bold">Menu</h2>
         </div>
-        <div className="grid p-2">
+        <div className="grid gap-1 p-2">
           {categories.map((item) => (
-            <button key={item} onClick={() => setCategory(item)} className={`min-h-11 shrink-0 cursor-pointer rounded-lg border-l-4 px-3 text-left text-sm transition-all duration-200 ${category === item ? "translate-x-1 border-brand bg-brand-tint font-semibold text-brand shadow-sm" : "border-transparent text-copy hover:translate-x-1 hover:bg-brand-tint"}`}>
+            <button key={item} onClick={() => setCategory(item)} className={`min-h-11 shrink-0 cursor-pointer rounded-lg border-l-4 px-3 text-left text-sm transition-all duration-200 ${category === item ? "border-brand bg-brand-tint font-semibold text-brand shadow-sm" : "border-transparent text-copy hover:border-brand-blush hover:bg-brand-tint hover:shadow-sm"}`}>
               {item}
             </button>
           ))}
         </div>
         <p className="px-5 pb-2 pt-6 text-xs font-semibold uppercase tracking-[0.14em] text-muted">Availability</p>
-        <div className="grid px-2">
+        <div className="grid gap-1 px-2">
           {(["All Items", "Available", "Sold Out"] as Availability[]).map((item) => (
-            <button key={item} onClick={() => setAvailability(item)} className={`min-h-11 cursor-pointer rounded-lg border-l-4 px-3 text-left text-sm transition-all duration-200 ${availability === item ? "translate-x-1 border-brand bg-brand font-semibold text-white shadow-sm" : "border-transparent text-copy hover:translate-x-1 hover:bg-brand-tint"}`}>{item}</button>
+            <button key={item} onClick={() => setAvailability(item)} className={`min-h-11 cursor-pointer rounded-lg border-l-4 px-3 text-left text-sm transition-all duration-200 ${availability === item ? "border-brand bg-brand font-semibold text-white shadow-sm" : "border-transparent text-copy hover:border-brand-blush hover:bg-brand-tint hover:shadow-sm"}`}>{item}</button>
           ))}
         </div>
       </aside>
