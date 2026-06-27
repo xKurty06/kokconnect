@@ -10,6 +10,8 @@ export function CheckoutClient() {
   const [method, setMethod] = useState<"cod" | "opod">("cod");
   const subtotal = 473;
   const total = 458;
+  const summaryRowClass = "grid grid-cols-[1fr_92px] items-center gap-4";
+  const paymentOptionClass = "flex min-h-12 cursor-pointer items-center gap-2 rounded-xl border px-3 py-2 text-sm transition-all duration-200";
 
   return (
     <div className="grid grid-cols-[700px_340px] items-start gap-8">
@@ -18,29 +20,52 @@ export function CheckoutClient() {
           <h2 id="checkout-summary-title" className="font-bold">Order Summary</h2>
           <span className="rounded-full bg-brand-tint px-3 py-1 text-xs font-semibold text-brand">Confirm details</span>
         </div>
-        <div className="overflow-x-auto">
-          <table className="mt-3 w-full min-w-[560px] text-left text-sm">
-            <thead className="text-xs text-muted"><tr><th className="py-3 font-medium">Item</th><th className="py-3 font-medium">Qty</th><th className="py-3 font-medium">Unit Price</th><th className="py-3 font-medium">Subtotal</th></tr></thead>
-            <tbody>{cartItems.map((item) => <tr key={item.id} className="interactive-row"><td className="rounded-l-lg py-3 pl-2">{item.name}</td><td>{item.quantity}</td><td>{formatPrice(item.price)}</td><td className="rounded-r-lg pr-2 font-semibold text-brand">{formatPrice(item.price * item.quantity)}</td></tr>)}</tbody>
+        <div className="overflow-hidden">
+          <table className="mt-3 w-full table-fixed text-left text-sm">
+            <thead className="text-xs text-muted">
+              <tr>
+                <th className="w-[48%] py-3 font-medium">Item</th>
+                <th className="w-[12%] py-3 font-medium">Qty</th>
+                <th className="w-[20%] py-3 font-medium">Unit Price</th>
+                <th className="w-[20%] py-3 font-medium">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cartItems.map((item) => (
+                <tr key={item.id} className="transition-colors duration-180 hover:bg-brand-tint">
+                  <td className="rounded-l-lg py-3 pl-2">{item.name}</td>
+                  <td>{item.quantity}</td>
+                  <td>{formatPrice(item.price)}</td>
+                  <td className="rounded-r-lg pr-2 font-semibold text-brand">{formatPrice(item.price * item.quantity)}</td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
-        <dl className="ml-auto mt-5 grid max-w-72 gap-2 border-y border-border py-4 text-sm">
-          <div className="flex justify-between"><dt className="text-muted">Subtotal Amount</dt><dd>{formatPrice(subtotal)}</dd></div>
-          <div className="flex justify-between"><dt className="text-muted">Delivery Surcharge</dt><dd>{formatPrice(25)}</dd></div>
-          <div className="flex justify-between"><dt className="text-muted">Voucher Discount</dt><dd className="text-success">- {formatPrice(40)}</dd></div>
+        <dl className="ml-auto mt-5 grid max-w-[300px] gap-2 border-y border-border py-4 text-sm">
+          <div className={summaryRowClass}><dt className="text-muted">Subtotal Amount</dt><dd className="text-right tabular-nums">{formatPrice(subtotal)}</dd></div>
+          <div className={summaryRowClass}><dt className="text-muted">Delivery Surcharge</dt><dd className="text-right tabular-nums">{formatPrice(25)}</dd></div>
+          <div className={summaryRowClass}><dt className="text-muted">Voucher Discount</dt><dd className="text-right tabular-nums text-success">- {formatPrice(40)}</dd></div>
         </dl>
-        <div className="ml-auto flex max-w-72 justify-between rounded-xl bg-brand-tint px-4 py-3"><strong>Grand Total to Pay</strong><strong className="text-xl text-brand">{formatPrice(total)}</strong></div>
+        <div className={`ml-auto grid max-w-[300px] rounded-xl bg-brand-tint px-4 py-3 text-sm ${summaryRowClass}`}>
+          <strong>Total</strong>
+          <strong className="text-right font-bold tabular-nums text-brand">{formatPrice(total)}</strong>
+        </div>
 
         <fieldset className="mt-5">
           <legend className="font-bold">Select Payment Method</legend>
           <div className="mt-3 grid grid-cols-2 gap-3">
-            <label className={`flex min-h-16 cursor-pointer items-center gap-3 rounded-xl border-2 p-4 transition-all duration-200 ${method === "cod" ? "border-brand bg-brand-tint text-brand shadow-[0_10px_22px_rgba(196,24,30,0.10)]" : "border-border bg-background hover:border-brand-blush hover:bg-white"}`}>
+            <label className={`${paymentOptionClass} ${method === "cod" ? "border-brand bg-brand-tint text-brand shadow-[0_8px_18px_rgba(196,24,30,0.10)]" : "border-border bg-background hover:border-brand-blush hover:bg-white"}`}>
               <input type="radio" name="payment" value="cod" checked={method === "cod"} onChange={() => setMethod("cod")} className="sr-only" />
-              <Banknote className="size-5" /><span className="font-semibold">Cash on Delivery (COD)</span><span className={`ml-auto size-4 rounded-full border-4 ${method === "cod" ? "border-current" : "border-border"}`} />
+              <Banknote className="size-4 shrink-0" />
+              <span className="font-semibold leading-tight">Cash on Delivery</span>
+              <span className={`ml-auto size-3.5 rounded-full border-[3px] ${method === "cod" ? "border-current" : "border-border"}`} />
             </label>
-            <label className={`flex min-h-16 cursor-pointer items-center gap-3 rounded-xl border-2 p-4 transition-all duration-200 ${method === "opod" ? "border-brand bg-brand-tint text-brand shadow-[0_10px_22px_rgba(196,24,30,0.10)]" : "border-border bg-background hover:border-brand-blush hover:bg-white"}`}>
+            <label className={`${paymentOptionClass} ${method === "opod" ? "border-brand bg-brand-tint text-brand shadow-[0_8px_18px_rgba(196,24,30,0.10)]" : "border-border bg-background hover:border-brand-blush hover:bg-white"}`}>
               <input type="radio" name="payment" value="opod" checked={method === "opod"} onChange={() => setMethod("opod")} className="sr-only" />
-              <CreditCard className="size-5" /><span className="font-semibold">Online Payment on Delivery</span>
+              <CreditCard className="size-4 shrink-0" />
+              <span className="font-semibold leading-tight">Online Payment</span>
+              <span className={`ml-auto size-3.5 rounded-full border-[3px] ${method === "opod" ? "border-current" : "border-border"}`} />
             </label>
           </div>
         </fieldset>
