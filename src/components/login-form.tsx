@@ -22,7 +22,7 @@ export function LoginForm() {
         </div>
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand/70">
-            KokConnect
+            Kuya Kok's
           </p>
           <h1 className="mt-1 text-3xl font-bold">Welcome Back!</h1>
           <p className="mt-1 text-sm text-muted">

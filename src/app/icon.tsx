@@ -8,7 +8,7 @@ export const size = {
 export const contentType = "image/png";
 
 export default function Icon() {
-  const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://kokconnect.vercel.app";
+  const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://kuyakoks.vercel.app";
 
   return new ImageResponse(
     (

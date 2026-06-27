@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     default: "KokConnect | Kuya Kok's",
     template: "%s | KokConnect",
   },
-  description: "Fresh Filipino grilled meals from Kuya Kok's, presented through KokConnect.",
+  description: "Fresh Filipino grilled meals from Kuya Kok's, presented through Kuya Kok's.",
   icons: {
     icon: [{ url: "/icon", type: "image/png", sizes: "64x64" }],
     shortcut: [{ url: "/icon", type: "image/png", sizes: "64x64" }],
