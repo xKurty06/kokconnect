@@ -50,7 +50,7 @@ export function LocationFormClient() {
             <AlertCircle className="size-4 shrink-0" />
             The coordinate field updates when you choose a new map location.
           </p>
-          <ButtonLink href="/order-tracking" className="w-full">Confirm Address</ButtonLink>
+          <ButtonLink href="/checkout" className="w-full">Confirm Address</ButtonLink>
         </div>
       </form>
     </div>
