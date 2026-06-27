@@ -54,7 +54,7 @@ export function RegisterFlow() {
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand/70">New customer setup</p>
         <h1 className="mt-1 text-2xl font-bold">Create Account</h1>
       </div>
-      <ol className="mx-auto mt-5 grid max-w-xl grid-cols-3" aria-label="Registration progress">
+      <ol className="mx-auto mt-5 grid max-w-lg grid-cols-3" aria-label="Registration progress">
         {labels.map((label, index) => {
           const number = index + 1;
           const done = step > number;
@@ -63,7 +63,7 @@ export function RegisterFlow() {
         })}
       </ol>
 
-      {step === 1 && <form key="step-1" noValidate className="auth-card-enter mx-auto mt-6 max-w-3xl" onSubmit={(event) => { event.preventDefault(); setStep(2); }}>
+      {step === 1 && <form key="step-1" noValidate className="auth-card-enter mx-auto mt-6 max-w-2xl" onSubmit={(event) => { event.preventDefault(); setStep(2); }}>
         <div className="grid grid-cols-2 gap-4">
           <label className={labelClass}>Full Name<input value={data.name} onChange={(event) => update("name", event.target.value)} autoComplete="name" className={inputClass} /></label>
           <label className={labelClass}>Email Address<input type="email" value={data.email} onChange={(event) => update("email", event.target.value)} autoComplete="email" className={inputClass} /></label>
@@ -76,8 +76,8 @@ export function RegisterFlow() {
         <p className="mt-4 text-center text-xs text-muted">Already have an account? <Link href="/login" className="font-semibold text-brand hover:text-brand-deep">Log In</Link></p>
       </form>}
 
-      {step === 2 && <div key="step-2" className="auth-card-enter mt-7 grid grid-cols-2 gap-7">
-        <InteractiveMap className="min-h-[500px] rounded-2xl border-[14px] border-[#e7ede5] shadow-[0_12px_30px_rgba(0,0,0,0.10)]" />
+      {step === 2 && <div key="step-2" className="auth-card-enter mt-7 grid grid-cols-2 gap-6">
+        <InteractiveMap className="min-h-[440px] rounded-2xl border-[12px] border-[#e7ede5] shadow-[0_12px_30px_rgba(0,0,0,0.10)]" />
         <form noValidate className="grid content-start gap-4" onSubmit={(event) => { event.preventDefault(); setStep(3); }}><div><h2 className="text-xl font-bold">Delivery Location Details</h2><p className="mt-1 text-sm text-muted">Specify your exact building, unit, or dorm reference point.</p></div>
           <label className={labelClass}>Pinned Location Coordinates (Autofilled)<input readOnly value="Lat: 14.195484, Lon: 120.881430 (Near CvSU Campus)" className={inputClass} /></label>
           <label className={labelClass}>Building / Street Name / Block &amp; Lot<input value={data.address} onChange={(event) => update("address", event.target.value)} className={inputClass} /></label>
