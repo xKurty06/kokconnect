@@ -68,8 +68,8 @@ export function LeafletMap({ value, onChange, popupTitle = "Delivery location", 
           </Popup>
         </Marker>
       </MapContainer>
-      <div className="pointer-events-none absolute left-3 top-3 z-[500] rounded-xl bg-white/95 px-3 py-2 text-xs font-semibold text-copy shadow-lg ring-1 ring-black/5 backdrop-blur">
-        Select map point or move marker
+      <div className="pointer-events-none absolute right-3 top-3 z-[500] max-w-[210px] rounded-xl bg-white/95 px-3 py-2 text-xs font-semibold leading-snug text-copy shadow-lg ring-1 ring-black/5 backdrop-blur">
+        Choose map point or marker
       </div>
     </>
   );
