@@ -12,7 +12,7 @@ interface SiteHeaderProps {
 export function SiteHeader({ active, variant = "white", showSearch = false, contained = false }: SiteHeaderProps) {
   const red = variant === "red";
   const innerClass = contained
-    ? "mx-auto flex h-full w-full max-w-[1440px] items-center justify-between gap-5 px-6"
+    ? "mx-auto flex h-full w-full max-w-[1560px] items-center justify-between gap-5 px-8"
     : "flex h-full w-full items-center justify-between gap-5 px-[60px]";
 
   return (
