@@ -9,6 +9,11 @@ export const metadata: Metadata = {
     template: "%s | KokConnect",
   },
   description: "Fresh Filipino grilled meals from Kuya Kok's, presented through KokConnect.",
+  icons: {
+    icon: "/assets/kuya-kok-logo.png",
+    shortcut: "/assets/kuya-kok-logo.png",
+    apple: "/assets/kuya-kok-logo.png",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
