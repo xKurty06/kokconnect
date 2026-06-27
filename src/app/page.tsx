@@ -9,7 +9,7 @@ export default function HomePage() {
   return (
     <main className="flex h-dvh min-h-[720px] overflow-hidden bg-white">
       <div className="flex min-h-0 w-full flex-col">
-        <SiteHeader active="home" variant="red" showSearch />
+        <SiteHeader active="home" variant="red" showSearch contained />
 
         <section className="shrink-0 bg-brand py-5 text-white">
           <div className={`${DESKTOP_CONTAINER} grid h-[274px] grid-cols-[1fr_400px] items-center gap-10`}>
