@@ -6,7 +6,7 @@ import { useMemo, useState } from "react";
 import { ProductCard } from "@/components/product-card";
 import { categories, products, type ProductCategory } from "@/lib/mock-data";
 
-const DESKTOP_CONTAINER = "mx-auto w-full max-w-[1440px] px-6";
+const DESKTOP_CONTAINER = "mx-auto w-full max-w-[1560px] px-8";
 
 export function CatalogClient() {
   const [category, setCategory] = useState<ProductCategory>("Best Seller");
@@ -17,7 +17,7 @@ export function CatalogClient() {
   }, [category]);
 
   return (
-    <section className="min-h-0 flex-1 overflow-hidden bg-white py-5" aria-labelledby="browse-heading">
+    <section className="min-h-0 flex-1 overflow-hidden bg-white py-4" aria-labelledby="browse-heading">
       <div className={`${DESKTOP_CONTAINER} flex h-full min-h-0 flex-col`}>
         <div className="flex shrink-0 items-center justify-between gap-4">
           <h2 id="browse-heading" className="text-2xl font-bold leading-tight">
