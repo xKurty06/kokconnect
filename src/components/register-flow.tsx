@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { AlertCircle, Check, ChevronDown, Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 import { InteractiveMap, type MapPosition } from "@/components/map/interactive-map";
 import { Button } from "@/components/ui/button";
 
@@ -37,9 +37,22 @@ export function RegisterFlow() {
 
   const update = (field: keyof RegistrationData, value: string) => setData((current) => ({ ...current, [field]: value }));
   const labels = ["Sign Up", "Pin Location", "Review"];
+  const cardWidth = step === 2 ? "max-w-[960px]" : "max-w-[860px]";
+
+  const renderShell = (children: ReactNode) => (
+    <main className="auth-shell-bg grid min-h-dvh place-items-center px-4 py-10">
+      <div className="pointer-events-none fixed left-12 top-14 size-24 rounded-full bg-gold-warm/20 blur-2xl" />
+      <div className="pointer-events-none fixed bottom-10 right-16 size-28 rounded-full bg-brand/15 blur-2xl" />
+      <div className={`auth-card-enter relative w-full overflow-hidden rounded-2xl border border-border border-t-4 border-t-brand bg-white shadow-[0_24px_70px_rgba(17,17,17,0.18)] ring-1 ring-black/[0.04] transition-[max-width] duration-300 ease-out ${cardWidth}`}>
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-brand-tint/70 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold-warm/80 to-transparent" />
+        <div className="relative z-10">{children}</div>
+      </div>
+    </main>
+  );
 
   if (step === 4) {
-    return (
+    return renderShell(
       <div className="auth-card-enter mx-auto max-w-lg p-10 text-center">
         <div className="mx-auto grid size-20 place-items-center rounded-full border-8 border-success/15 bg-success text-white shadow-[0_12px_28px_rgba(45,189,98,0.20)]"><Check className="size-9" /></div>
         <h1 className="mt-6 text-3xl font-bold">Account Created!</h1>
@@ -47,11 +60,11 @@ export function RegisterFlow() {
         <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-muted">Your account is ready. Browse our menu and place your first order — hot, fast, affordable.</p>
         <div className="mt-7 flex items-center justify-between rounded-xl border border-success/15 bg-success/5 p-4 text-left text-sm"><div><strong className="block">{data.email}</strong><p className="text-muted">{data.phone}</p></div><span className="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">✓ Active</span></div>
         <div className="mt-5 grid gap-3"><Link href="/menu" className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand font-semibold text-white shadow-lg hover:bg-brand-deep">Start Ordering Now</Link><Link href="/" className="inline-flex min-h-12 items-center justify-center rounded-full border border-brand font-semibold text-brand hover:bg-brand-tint">Go to Home</Link></div>
-      </div>
+      </div>,
     );
   }
 
-  return (
+  return renderShell(
     <div className="p-8">
       <div className="text-center">
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand/70">New customer setup</p>
@@ -96,6 +109,6 @@ export function RegisterFlow() {
         <section className="surface-card mt-5 overflow-hidden rounded-xl"><div className="flex justify-between bg-background px-4 py-3 text-xs font-semibold"><span>DEFAULT DELIVERY LOCATION</span><button onClick={() => setStep(2)} className="text-brand hover:text-brand-deep">Edit</button></div><dl className="divide-y divide-border px-4 text-sm"><div className="py-3"><dt className="text-muted">Selected Coordinates</dt><dd className="font-semibold">{formatPosition(mapPosition)}</dd></div><div className="py-3"><dt className="text-muted">Building / Landmark</dt><dd className="font-semibold">{data.address}</dd></div><div className="py-3"><dt className="text-muted">Dorm / Reference</dt><dd className="font-semibold">{data.landmark}</dd></div></dl></section>
         <label className="mt-5 flex gap-3 rounded-lg bg-background p-3 text-xs text-copy"><input type="checkbox" defaultChecked className="size-4 accent-brand" />By creating an account, you agree to the Terms &amp; Conditions and Privacy Policy.</label><Button className="mt-5 w-full" onClick={() => setStep(4)}>Create My Account</Button><button className="mx-auto mt-3 block min-h-11 text-sm text-muted hover:text-brand" onClick={() => setStep(2)}>← Back to Step 2</button>
       </div>}
-    </div>
+    </div>,
   );
 }
