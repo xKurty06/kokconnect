@@ -24,6 +24,9 @@ const initialData: RegistrationData = {
   notes: "",
 };
 
+const inputClass = "h-11 rounded-lg border border-border bg-background px-4 font-normal shadow-sm transition focus:border-brand-blush focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand/10";
+const labelClass = "grid gap-1.5 text-sm font-semibold";
+
 export function RegisterFlow() {
   const [step, setStep] = useState(1);
   const [data, setData] = useState(initialData);
@@ -51,7 +54,7 @@ export function RegisterFlow() {
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand/70">New customer setup</p>
         <h1 className="mt-1 text-2xl font-bold">Create Account</h1>
       </div>
-      <ol className="mx-auto mt-6 grid max-w-xl grid-cols-3" aria-label="Registration progress">
+      <ol className="mx-auto mt-5 grid max-w-xl grid-cols-3" aria-label="Registration progress">
         {labels.map((label, index) => {
           const number = index + 1;
           const done = step > number;
@@ -60,23 +63,26 @@ export function RegisterFlow() {
         })}
       </ol>
 
-      {step === 1 && <form key="step-1" noValidate className="auth-card-enter mx-auto mt-7 grid max-w-xl gap-5" onSubmit={(event) => { event.preventDefault(); setStep(2); }}>
-        <label className="grid gap-2 text-sm font-semibold">Full Name<input value={data.name} onChange={(event) => update("name", event.target.value)} autoComplete="name" className="form-field h-12 rounded-lg px-4 font-normal" /></label>
-        <label className="grid gap-2 text-sm font-semibold">Email Address<input type="email" value={data.email} onChange={(event) => update("email", event.target.value)} autoComplete="email" className="form-field h-12 rounded-lg px-4 font-normal" /></label>
-        <label className="grid gap-2 text-sm font-semibold">Mobile Number<input type="tel" value={data.phone} onChange={(event) => update("phone", event.target.value)} autoComplete="tel" className="form-field h-12 rounded-lg px-4 font-normal" /></label>
-        <label className="grid gap-2 text-sm font-semibold">Password<span className="relative"><input type={showPassword ? "text" : "password"} placeholder="Create a strong password" autoComplete="new-password" className="form-field h-12 w-full rounded-lg px-4 pr-12 font-normal" /><button type="button" onClick={() => setShowPassword((value) => !value)} className="absolute right-1 top-0 grid size-12 place-items-center rounded-lg text-muted hover:bg-brand-tint hover:text-brand" aria-label={showPassword ? "Hide password" : "Show password"}>{showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}</button></span></label>
-        <label className="grid gap-2 text-sm font-semibold">Confirm Password<input type="password" placeholder="Re-enter password" autoComplete="new-password" className="form-field h-12 rounded-lg px-4 font-normal" /></label>
-        <label className="flex items-start gap-3 rounded-lg bg-background p-3 text-xs text-copy"><input type="checkbox" className="mt-0.5 size-4 accent-brand" />I agree to the Terms &amp; Conditions and Privacy Policy.</label>
-        <Button type="submit" className="w-full">Continue to Step 2 →</Button><p className="text-center text-xs text-muted">Already have an account? <Link href="/login" className="font-semibold text-brand hover:text-brand-deep">Log In</Link></p>
+      {step === 1 && <form key="step-1" noValidate className="auth-card-enter mx-auto mt-6 max-w-3xl rounded-2xl border border-border bg-white/90 p-6 shadow-[0_12px_30px_rgba(0,0,0,0.08)]" onSubmit={(event) => { event.preventDefault(); setStep(2); }}>
+        <div className="grid grid-cols-2 gap-4">
+          <label className={labelClass}>Full Name<input value={data.name} onChange={(event) => update("name", event.target.value)} autoComplete="name" className={inputClass} /></label>
+          <label className={labelClass}>Email Address<input type="email" value={data.email} onChange={(event) => update("email", event.target.value)} autoComplete="email" className={inputClass} /></label>
+          <label className={labelClass}>Mobile Number<input type="tel" value={data.phone} onChange={(event) => update("phone", event.target.value)} autoComplete="tel" className={inputClass} /></label>
+          <label className={labelClass}>Password<span className="relative"><input type={showPassword ? "text" : "password"} placeholder="Create a strong password" autoComplete="new-password" className={`${inputClass} w-full pr-12`} /><button type="button" onClick={() => setShowPassword((value) => !value)} className="absolute right-1 top-0 grid size-11 place-items-center rounded-lg text-muted hover:bg-brand-tint hover:text-brand" aria-label={showPassword ? "Hide password" : "Show password"}>{showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}</button></span></label>
+          <label className={`${labelClass} col-span-2`}>Confirm Password<input type="password" placeholder="Re-enter password" autoComplete="new-password" className={inputClass} /></label>
+        </div>
+        <label className="mt-5 flex items-start gap-3 rounded-xl border border-border bg-background p-3 text-xs text-copy"><input type="checkbox" className="mt-0.5 size-4 accent-brand" />I agree to the Terms &amp; Conditions and Privacy Policy.</label>
+        <Button type="submit" className="mt-5 w-full">Continue to Step 2 →</Button>
+        <p className="mt-4 text-center text-xs text-muted">Already have an account? <Link href="/login" className="font-semibold text-brand hover:text-brand-deep">Log In</Link></p>
       </form>}
 
       {step === 2 && <div key="step-2" className="auth-card-enter mt-7 grid grid-cols-2 gap-7">
         <InteractiveMap className="min-h-[500px] rounded-2xl border-[14px] border-[#e7ede5] shadow-[0_12px_30px_rgba(0,0,0,0.10)]" />
         <form noValidate className="grid content-start gap-4" onSubmit={(event) => { event.preventDefault(); setStep(3); }}><div><h2 className="text-xl font-bold">Delivery Location Details</h2><p className="mt-1 text-sm text-muted">Specify your exact building, unit, or dorm reference point.</p></div>
-          <label className="grid gap-2 text-sm font-semibold">Pinned Location Coordinates (Autofilled)<input readOnly value="Lat: 14.195484, Lon: 120.881430 (Near CvSU Campus)" className="form-field h-12 rounded-lg px-4 font-normal" /></label>
-          <label className="grid gap-2 text-sm font-semibold">Building / Street Name / Block &amp; Lot<input value={data.address} onChange={(event) => update("address", event.target.value)} className="form-field h-12 rounded-lg px-4 font-normal" /></label>
-          <label className="relative grid gap-2 text-sm font-semibold">Select Dorm / Landmark<select value={data.landmark} onChange={(event) => update("landmark", event.target.value)} className="form-select h-12 appearance-none rounded-lg px-4 pr-10 font-normal"><option>CvSU Dormitory Building 3</option><option>Main Gate</option></select><ChevronDown className="absolute bottom-4 right-4 size-4 text-muted" /></label>
-          <label className="grid gap-2 text-sm font-semibold">Delivery Notes (Optional)<textarea value={data.notes} onChange={(event) => update("notes", event.target.value)} rows={2} className="form-area resize-none rounded-lg p-4 font-normal" /></label>
+          <label className={labelClass}>Pinned Location Coordinates (Autofilled)<input readOnly value="Lat: 14.195484, Lon: 120.881430 (Near CvSU Campus)" className={inputClass} /></label>
+          <label className={labelClass}>Building / Street Name / Block &amp; Lot<input value={data.address} onChange={(event) => update("address", event.target.value)} className={inputClass} /></label>
+          <label className="relative grid gap-1.5 text-sm font-semibold">Select Dorm / Landmark<select value={data.landmark} onChange={(event) => update("landmark", event.target.value)} className={`${inputClass} appearance-none pr-10`}><option>CvSU Dormitory Building 3</option><option>Main Gate</option></select><ChevronDown className="absolute bottom-3.5 right-4 size-4 text-muted" /></label>
+          <label className={labelClass}>Delivery Notes (Optional)<textarea value={data.notes} onChange={(event) => update("notes", event.target.value)} rows={2} className="resize-none rounded-lg border border-border bg-background p-4 font-normal shadow-sm transition focus:border-brand-blush focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand/10" /></label>
           <p className="flex gap-2 rounded-lg border border-brand-blush bg-brand-tint p-3 text-xs font-medium text-brand"><AlertCircle className="size-4 shrink-0" />We currently deliver within Indang and CvSU area only.</p>
           <div className="grid grid-cols-2 gap-3"><Button type="button" variant="ghost" onClick={() => setStep(1)}>← Back to Step 1</Button><Button type="submit">Continue to Step 3 →</Button></div>
         </form>
