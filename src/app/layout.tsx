@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   },
   description: "Fresh Filipino grilled meals from Kuya Kok's, presented through KokConnect.",
   icons: {
-    icon: "/assets/kuya-kok-logo.png",
-    shortcut: "/assets/kuya-kok-logo.png",
-    apple: "/assets/kuya-kok-logo.png",
+    icon: [{ url: "/icon", type: "image/png", sizes: "64x64" }],
+    shortcut: [{ url: "/icon", type: "image/png", sizes: "64x64" }],
+    apple: [{ url: "/icon", type: "image/png", sizes: "64x64" }],
   },
 };
 
