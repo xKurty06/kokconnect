@@ -7,7 +7,7 @@ const logoIcon = "/assets/kuya-kok-logo.png?v=navbar-logo";
 
 export const metadata: Metadata = {
   title: {
-    default: "Kuya Kok's",
+    default: "Kuya Kok's",  
     template: "%s | Kuya Kok's",
   },
   description: "Fresh Filipino grilled meals from Kuya Kok's, presented through Kuya Kok's.",
