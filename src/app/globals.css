@@ -54,7 +54,10 @@ html {
 body {
   margin: 0;
   min-width: 1180px;
-  background: var(--background);
+  background:
+    radial-gradient(circle at top left, rgba(196, 24, 30, 0.05), transparent 32rem),
+    radial-gradient(circle at bottom right, rgba(245, 166, 35, 0.07), transparent 30rem),
+    var(--background);
   color: var(--foreground);
   font-family: "Inter Variable", Inter, Arial, sans-serif;
 }
@@ -100,8 +103,16 @@ a:active {
   animation: menu-panel-enter 260ms ease-out both;
 }
 
+.menu-grid-enter {
+  animation: menu-panel-enter 220ms ease-out both;
+}
+
 .menu-card-enter {
   animation: menu-card-enter 280ms ease-out both;
+}
+
+.bag-bump {
+  animation: bag-bump 280ms ease-out both;
 }
 
 .home-hero-copy,
@@ -213,6 +224,20 @@ a:active {
 
   to {
     opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes bag-bump {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  45% {
+    transform: translateY(-2px) scale(1.035);
+  }
+
+  100% {
     transform: translateY(0) scale(1);
   }
 }
