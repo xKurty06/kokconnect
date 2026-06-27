@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Eye, EyeOff, ShieldCheck } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -20,11 +20,6 @@ export function LoginForm() {
           <h1 className="mt-1 text-3xl font-bold">Welcome Back!</h1>
           <p className="mt-1 text-sm text-muted">Log in to your Kuya Kok&apos;s account.</p>
         </div>
-      </div>
-
-      <div className="mt-6 flex items-center gap-2 rounded-xl border border-gold-pale bg-gold-tint px-4 py-3 text-xs font-medium text-gold-deep">
-        <ShieldCheck className="size-4 shrink-0" />
-        Frontend demo only — no real account credentials are processed.
       </div>
 
       <form className="mt-7 grid gap-5" onSubmit={(event) => event.preventDefault()}>
