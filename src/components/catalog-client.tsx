@@ -6,7 +6,7 @@ import { useMemo, useState } from "react";
 import { ProductCard } from "@/components/product-card";
 import { categories, products, type ProductCategory } from "@/lib/mock-data";
 
-const DESKTOP_CONTAINER = "mx-auto w-full max-w-[1280px] px-6";
+const DESKTOP_CONTAINER = "mx-auto w-full max-w-[1440px] px-6";
 
 export function CatalogClient() {
   const [category, setCategory] = useState<ProductCategory>("Best Seller");
@@ -17,7 +17,7 @@ export function CatalogClient() {
   }, [category]);
 
   return (
-    <section className="min-h-0 flex-1 overflow-hidden bg-white py-3" aria-labelledby="browse-heading">
+    <section className="min-h-0 flex-1 overflow-hidden bg-white py-5" aria-labelledby="browse-heading">
       <div className={`${DESKTOP_CONTAINER} flex h-full min-h-0 flex-col`}>
         <div className="flex shrink-0 items-center justify-between gap-4">
           <h2 id="browse-heading" className="text-2xl font-bold leading-tight">
@@ -28,7 +28,7 @@ export function CatalogClient() {
           </Link>
         </div>
 
-        <div className="mt-2 flex shrink-0 gap-2 overflow-hidden" role="tablist" aria-label="Meal categories">
+        <div className="mt-3 flex shrink-0 gap-2 overflow-hidden" role="tablist" aria-label="Meal categories">
           {categories.map((item) => (
             <button
               key={item}
@@ -45,7 +45,7 @@ export function CatalogClient() {
           ))}
         </div>
 
-        <div className="mt-3 flex shrink-0 items-center gap-3">
+        <div className="mt-4 flex shrink-0 items-center gap-3">
           <h3 className="font-bold leading-tight">Today&apos;s Picks</h3>
           <span className="rounded-full bg-gold-tint px-3 py-1 text-xs font-semibold text-gold">Best Sellers</span>
           <Link href="/menu" className="ml-auto text-sm font-bold text-brand underline underline-offset-4">
@@ -53,7 +53,7 @@ export function CatalogClient() {
           </Link>
         </div>
 
-        <div className="mt-2 grid shrink-0 grid-cols-6 items-start gap-3 overflow-hidden">
+        <div className="mt-3 grid shrink-0 grid-cols-6 items-start gap-4 overflow-hidden">
           {visible.map((product) => (
             <ProductCard key={product.id} product={product} compact onAdd={() => setBagCount((count) => count + 1)} />
           ))}
