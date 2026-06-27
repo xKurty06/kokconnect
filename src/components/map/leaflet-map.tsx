@@ -1,13 +1,26 @@
 "use client";
 
 import L from "leaflet";
-import { useMemo } from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { useCallback, useMemo, useState } from "react";
+import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
+import type { InteractiveMapProps, MapPosition } from "./interactive-map";
 
-// TODO: Verify the precise storefront coordinates for Kuya Kok's in Bancod 3, Indang, Cavite.
-const BUSINESS_POSITION: [number, number] = [14.195484, 120.88143];
+const DEFAULT_POSITION: MapPosition = [14.195484, 120.88143];
 
-export function LeafletMap() {
+function MapClickHandler({ onPick }: { onPick: (position: MapPosition) => void }) {
+  useMapEvents({
+    click(event) {
+      onPick([event.latlng.lat, event.latlng.lng]);
+    },
+  });
+
+  return null;
+}
+
+export function LeafletMap({ value, onChange, popupTitle = "Delivery location", popupDescription = "Select a point on the map or move the marker." }: InteractiveMapProps) {
+  const [localPosition, setLocalPosition] = useState<MapPosition>(value ?? DEFAULT_POSITION);
+  const activePosition = value ?? localPosition;
+
   const markerIcon = useMemo(
     () =>
       L.divIcon({
@@ -20,18 +33,44 @@ export function LeafletMap() {
     [],
   );
 
+  const updatePosition = useCallback(
+    (nextPosition: MapPosition) => {
+      setLocalPosition(nextPosition);
+      onChange?.(nextPosition);
+    },
+    [onChange],
+  );
+
+  const markerEvents = useMemo(
+    () => ({
+      dragend(event: L.LeafletEvent) {
+        const marker = event.target as L.Marker;
+        const next = marker.getLatLng();
+        updatePosition([next.lat, next.lng]);
+      },
+    }),
+    [updatePosition],
+  );
+
   return (
-    <MapContainer center={BUSINESS_POSITION} zoom={16} scrollWheelZoom className="h-full min-h-[inherit] w-full" aria-label="Interactive map showing Kuya Kok's Griddle and Grill">
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <Marker position={BUSINESS_POSITION} icon={markerIcon}>
-        <Popup>
-          <strong>Kuya Kok&apos;s Griddle and Grill</strong>
-          <br />Bancod 3, Indang, Cavite
-        </Popup>
-      </Marker>
-    </MapContainer>
+    <>
+      <MapContainer center={activePosition} zoom={16} scrollWheelZoom className="h-full min-h-[inherit] w-full" aria-label="Editable delivery map">
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <MapClickHandler onPick={updatePosition} />
+        <Marker position={activePosition} icon={markerIcon} draggable eventHandlers={markerEvents}>
+          <Popup>
+            <strong>{popupTitle}</strong>
+            <br />
+            {popupDescription}
+          </Popup>
+        </Marker>
+      </MapContainer>
+      <div className="pointer-events-none absolute left-3 top-3 z-[500] rounded-xl bg-white/95 px-3 py-2 text-xs font-semibold text-copy shadow-lg ring-1 ring-black/5 backdrop-blur">
+        Select map point or move marker
+      </div>
+    </>
   );
 }
