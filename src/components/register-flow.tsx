@@ -67,9 +67,9 @@ export function RegisterFlow() {
         <div className="grid grid-cols-2 gap-4">
           <label className={labelClass}>Full Name<input value={data.name} onChange={(event) => update("name", event.target.value)} autoComplete="name" className={inputClass} /></label>
           <label className={labelClass}>Email Address<input type="email" value={data.email} onChange={(event) => update("email", event.target.value)} autoComplete="email" className={inputClass} /></label>
-          <label className={labelClass}>Mobile Number<input type="tel" value={data.phone} onChange={(event) => update("phone", event.target.value)} autoComplete="tel" className={inputClass} /></label>
+          <label className={`${labelClass} col-span-2`}>Mobile Number<input type="tel" value={data.phone} onChange={(event) => update("phone", event.target.value)} autoComplete="tel" className={inputClass} /></label>
           <label className={labelClass}>Password<span className="relative"><input type={showPassword ? "text" : "password"} placeholder="Create a strong password" autoComplete="new-password" className={`${inputClass} w-full pr-12`} /><button type="button" onClick={() => setShowPassword((value) => !value)} className="absolute right-1 top-0 grid size-11 place-items-center rounded-lg text-muted hover:bg-brand-tint hover:text-brand" aria-label={showPassword ? "Hide password" : "Show password"}>{showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}</button></span></label>
-          <label className={`${labelClass} col-span-2`}>Confirm Password<input type="password" placeholder="Re-enter password" autoComplete="new-password" className={inputClass} /></label>
+          <label className={labelClass}>Confirm Password<input type="password" placeholder="Re-enter password" autoComplete="new-password" className={inputClass} /></label>
         </div>
         <label className="mt-5 flex items-start gap-3 rounded-xl border border-border bg-background p-3 text-xs text-copy"><input type="checkbox" className="mt-0.5 size-4 accent-brand" />I agree to the Terms &amp; Conditions and Privacy Policy.</label>
         <Button type="submit" className="mt-5 w-full">Continue to Step 2 →</Button>
