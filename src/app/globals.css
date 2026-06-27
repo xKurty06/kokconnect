@@ -183,8 +183,6 @@ a:active {
 
 .home-hero-copy,
 .home-hero-media,
-.home-catalog-header,
-.home-category-tabs,
 .home-picks-header,
 .home-product-grid > * {
   animation: home-enter 420ms ease-out both;
@@ -198,40 +196,32 @@ a:active {
   animation-delay: 120ms;
 }
 
-.home-catalog-header {
+.home-picks-header {
   animation-delay: 170ms;
 }
 
-.home-category-tabs {
+.home-product-grid > *:nth-child(1) {
   animation-delay: 210ms;
 }
 
-.home-picks-header {
-  animation-delay: 250ms;
-}
-
-.home-product-grid > *:nth-child(1) {
-  animation-delay: 290ms;
-}
-
 .home-product-grid > *:nth-child(2) {
-  animation-delay: 325ms;
+  animation-delay: 245ms;
 }
 
 .home-product-grid > *:nth-child(3) {
-  animation-delay: 360ms;
+  animation-delay: 280ms;
 }
 
 .home-product-grid > *:nth-child(4) {
-  animation-delay: 395ms;
+  animation-delay: 315ms;
 }
 
 .home-product-grid > *:nth-child(5) {
-  animation-delay: 430ms;
+  animation-delay: 350ms;
 }
 
 .home-product-grid > *:nth-child(6) {
-  animation-delay: 465ms;
+  animation-delay: 385ms;
 }
 
 @keyframes page-enter {
