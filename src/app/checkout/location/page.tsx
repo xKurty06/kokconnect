@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MapPin } from "lucide-react";
 import type { Metadata } from "next";
 import { LocationFormClient } from "@/components/location-form-client";
+import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = { title: "Delivery Location" };
@@ -22,6 +23,7 @@ export default function LocationPage() {
         </div>
         <LocationFormClient />
       </main>
+      <SiteFooter />
     </div>
   );
 }
